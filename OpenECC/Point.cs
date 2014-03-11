@@ -8,8 +8,8 @@ namespace OpenECC
 {
     public abstract class Point
     {
-        public abstract int X { get; }
-        public abstract int Y { get; }
+        public abstract FiniteFieldElement X { get; }
+        public abstract FiniteFieldElement Y { get; }
 
         public abstract Point Add(Point q);
         public abstract Point Multiply(Point q);
