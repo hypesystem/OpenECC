@@ -36,7 +36,12 @@ namespace OpenECC
 
         public override Point Exponentiate(int x)
         {
-            throw new NotImplementedException();
+            Point tmp = this;
+            for (int i = 0; i < x; i++)
+            {
+                tmp = tmp * this;
+            }
+            return tmp;
         }
     }
 }
