@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace OpenECC
 {
+    //TODO: Replace usage of BouncyCastle BigInteger with C# BigInteger.
     public class FiniteFieldCurvePoint : Point
     {
-        private readonly int _x, _y;
+        private readonly FiniteFieldElement _x, _y, _z;
         private readonly ICurve _curve;
 
-        public FiniteFieldCurvePoint(int x, int y, ICurve curve)
+        public FiniteFieldCurvePoint(FiniteFieldElement x, FiniteFieldElement y, ICurve curve)
         {
             _x = x;
             _y = y;
+            _z = new FiniteFieldElement(x.X, new BigInteger(1));
             _curve = curve;
         }
 
-        public override int X { get { return _x; } }
-        public override int Y { get { return _y; } }
+        public override FiniteFieldElement X { get { return _x; } }
+        public override FiniteFieldElement Y { get { return _y; } }
 
         public override Point Add(Point q)
         {
