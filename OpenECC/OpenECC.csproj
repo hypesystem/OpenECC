@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurveFactory.cs" />
     <Compile Include="FiniteFieldCurve.cs" />
     <Compile Include="FiniteFieldElement.cs" />
     <Compile Include="ICurve.cs" />
