@@ -22,6 +22,10 @@ namespace OpenECC
             _field = new FpFieldElement(bouncy_q, bouncy_x);
         }
 
+        FiniteFieldElement(FpFieldElement innerField) {
+            _field = innerField;
+        }
+
         public BigInteger Q
         {
             get
@@ -38,6 +42,7 @@ namespace OpenECC
             }
         }
 
+        #region BigIntegerConversion
         private BigInteger ConvertBouncyCastleToCSharpBigInteger(Org.BouncyCastle.Math.BigInteger i)
         {
             throw new NotImplementedException();
@@ -47,5 +52,20 @@ namespace OpenECC
         {
             throw new NotImplementedException();
         }
+        #endregion
+
+        public FiniteFieldElement Negate()
+        {
+            return new FiniteFieldElement(_field.Negate() as FpFieldElement);
+        }
+
+        #region operators
+
+        public static FiniteFieldElement operator -(FiniteFieldElement f)
+        {
+            return f.Negate();
+        }
+
+        #endregion
     }
 }

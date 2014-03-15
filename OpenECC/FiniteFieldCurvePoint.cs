@@ -46,7 +46,7 @@ namespace OpenECC
 
         public override Point Negate()
         {
-            throw new NotImplementedException();
+            return new FiniteFieldCurvePoint(X, -Y, _curve);
         }
     }
 }
