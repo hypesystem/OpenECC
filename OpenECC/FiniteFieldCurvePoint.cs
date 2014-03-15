@@ -43,5 +43,10 @@ namespace OpenECC
             }
             return tmp;
         }
+
+        public override Point Negate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

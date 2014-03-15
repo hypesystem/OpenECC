@@ -14,6 +14,7 @@ namespace OpenECC
         public abstract Point Add(Point q);
         public abstract Point Multiply(Point q);
         public abstract Point Exponentiate(int x);
+        public abstract Point Negate();
 
         #region operators
         public static Point operator +(Point p, Point q)
@@ -29,6 +30,11 @@ namespace OpenECC
         public static Point operator ^(Point p, int x)
         {
             return p.Exponentiate(x);
+        }
+
+        public static Point operator -(Point p)
+        {
+            return p.Negate();
         }
         #endregion
     }
