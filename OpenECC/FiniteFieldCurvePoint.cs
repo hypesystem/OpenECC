@@ -7,7 +7,6 @@ using System.Numerics;
 
 namespace OpenECC
 {
-    //TODO: Replace usage of BouncyCastle BigInteger with C# BigInteger.
     public class FiniteFieldCurvePoint : Point
     {
         private readonly FiniteFieldElement _x, _y, _z;
