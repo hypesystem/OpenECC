@@ -28,10 +28,12 @@ namespace OpenECC
 
         public override Point Add(Point q)
         {
+            //p + infinity = p
             if (q == Infinity)
                 return this;
 
-            if (-this == q)
+            //p + -p = infinity
+            if (this == -q)
                 return Infinity;
 
             throw new NotImplementedException();
@@ -54,6 +56,7 @@ namespace OpenECC
 
         public override Point Negate()
         {
+            //-infinity = infinity
             if (this == Infinity)
                 return this;
 
