@@ -54,6 +54,9 @@ namespace OpenECC
 
         public override Point Negate()
         {
+            if (this == Infinity)
+                return this;
+
             return new FiniteFieldCurvePoint(X, -Y, _curve);
         }
     }
