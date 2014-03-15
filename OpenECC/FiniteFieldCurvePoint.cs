@@ -9,6 +9,9 @@ namespace OpenECC
 {
     public class FiniteFieldCurvePoint : Point
     {
+        private static readonly FiniteFieldCurvePoint _infinity = new FiniteFieldCurvePoint(null,null,null);
+        private FiniteFieldCurvePoint Infinity { get { return _infinity; } }
+
         private readonly FiniteFieldElement _x, _y, _z;
         private readonly ICurve _curve;
 
@@ -25,6 +28,12 @@ namespace OpenECC
 
         public override Point Add(Point q)
         {
+            if (q == Infinity)
+                return this;
+
+            if (-this == q)
+                return Infinity;
+
             throw new NotImplementedException();
         }
 
