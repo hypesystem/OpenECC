@@ -81,8 +81,8 @@ namespace OpenECC
 
         public FiniteFieldElement Multiply(int x)
         {
-            //TWO and THREE should be gotten from curve, maybe? See BouncyCastle Implementation
-            throw new NotImplementedException();
+            var xAsFiniteFieldElement = new FiniteFieldElement(new BigInteger(x), Q);
+            return Multiply(xAsFiniteFieldElement);
         }
 
         public FiniteFieldElement Multiply(FiniteFieldElement f2)
