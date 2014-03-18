@@ -22,7 +22,7 @@ namespace OpenECC
             _field = new FpFieldElement(bouncy_q, bouncy_x);
         }
 
-        FiniteFieldElement(FpFieldElement innerField) {
+        private FiniteFieldElement(FpFieldElement innerField) {
             _field = innerField;
         }
 
@@ -59,11 +59,75 @@ namespace OpenECC
             return new FiniteFieldElement(_field.Negate() as FpFieldElement);
         }
 
+        public FiniteFieldElement Subtract(FiniteFieldElement f2)
+        {
+            var resultingElement = _field.Subtract(f2._field) as FpFieldElement;
+            return new FiniteFieldElement(resultingElement);
+        }
+
+        public FiniteFieldElement Add(FiniteFieldElement f2)
+        {
+            var resultingElement = _field.Add(f2._field) as FpFieldElement;
+            return new FiniteFieldElement(resultingElement);
+        }
+
+        public FiniteFieldElement DivideBy(FiniteFieldElement f2)
+        {
+            var resultingElement = _field.Divide(f2._field) as FpFieldElement;
+            return new FiniteFieldElement(resultingElement);
+        }
+
+        public FiniteFieldElement Times(int x)
+        {
+            //TWO and THREE should be gotten from curve, maybe? See BouncyCastle Implementation
+            throw new NotImplementedException();
+        }
+
+        public FiniteFieldElement Times(FiniteFieldElement f2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FiniteFieldElement Exponentiate(int n)
+        {
+            throw new NotImplementedException();
+        }
+
         #region operators
 
         public static FiniteFieldElement operator -(FiniteFieldElement f)
         {
             return f.Negate();
+        }
+
+        public static FiniteFieldElement operator -(FiniteFieldElement f1, FiniteFieldElement f2)
+        {
+            return f1.Subtract(f2);
+        }
+
+        public static FiniteFieldElement operator +(FiniteFieldElement f1, FiniteFieldElement f2)
+        {
+            return f1.Add(f2);
+        }
+
+        public static FiniteFieldElement operator /(FiniteFieldElement f1, FiniteFieldElement f2)
+        {
+            return f1.DivideBy(f2);
+        }
+
+        public static FiniteFieldElement operator *(int x, FiniteFieldElement f)
+        {
+            return f.Times(x);
+        }
+
+        public static FiniteFieldElement operator *(FiniteFieldElement f1, FiniteFieldElement f2)
+        {
+            return f1.Times(f2);
+        }
+
+        public static FiniteFieldElement operator ^(FiniteFieldElement f, int n)
+        {
+            return f.Exponentiate(n);
         }
 
         #endregion
