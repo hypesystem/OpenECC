@@ -79,13 +79,13 @@ namespace OpenECC
             return new FiniteFieldElement(resultingElement);
         }
 
-        public FiniteFieldElement Times(int x)
+        public FiniteFieldElement Multiply(int x)
         {
             //TWO and THREE should be gotten from curve, maybe? See BouncyCastle Implementation
             throw new NotImplementedException();
         }
 
-        public FiniteFieldElement Times(FiniteFieldElement f2)
+        public FiniteFieldElement Multiply(FiniteFieldElement f2)
         {
             var resultingElement = _field.Multiply(f2._field) as FpFieldElement;
             return new FiniteFieldElement(resultingElement);
@@ -127,12 +127,12 @@ namespace OpenECC
 
         public static FiniteFieldElement operator *(int x, FiniteFieldElement f)
         {
-            return f.Times(x);
+            return f.Multiply(x);
         }
 
         public static FiniteFieldElement operator *(FiniteFieldElement f1, FiniteFieldElement f2)
         {
-            return f1.Times(f2);
+            return f1.Multiply(f2);
         }
 
         public static FiniteFieldElement operator ^(FiniteFieldElement f, int n)
