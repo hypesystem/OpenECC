@@ -24,5 +24,13 @@ namespace OpenECC
                 return new WeierstrassCurve(new BigInteger(0), new BigInteger(7), p);
             }
         }
+
+        /*
+         * TODO: Implement this.
+        public static ICurve WeierstrassFromMontgomeryCurve(MontgomeryCurve _mcurve)
+        {
+
+        }
+        */
     }
 }
