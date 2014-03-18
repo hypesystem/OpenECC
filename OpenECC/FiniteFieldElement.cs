@@ -54,6 +54,8 @@ namespace OpenECC
         }
         #endregion
 
+        #region Arithmetic Wrapping
+
         public FiniteFieldElement Negate()
         {
             return new FiniteFieldElement(_field.Negate() as FpFieldElement);
@@ -85,13 +87,21 @@ namespace OpenECC
 
         public FiniteFieldElement Times(FiniteFieldElement f2)
         {
-            throw new NotImplementedException();
+            var resultingElement = _field.Multiply(f2._field) as FpFieldElement;
+            return new FiniteFieldElement(resultingElement);
         }
 
         public FiniteFieldElement Exponentiate(int n)
         {
-            throw new NotImplementedException();
+            ECFieldElement result = _field;
+            for (int i = 1; i < n; i++)
+            {
+                result = result.Multiply(_field);
+            }
+            return new FiniteFieldElement(result as FpFieldElement);
         }
+
+        #endregion
 
         #region operators
 

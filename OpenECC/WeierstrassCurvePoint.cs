@@ -78,7 +78,7 @@ namespace OpenECC
         public override Point Exponentiate(int x)
         {
             Point tmp = this;
-            for (int i = 0; i < x; i++)
+            for (int i = 1; i < x; i++)
             {
                 tmp = tmp * this;
             }
