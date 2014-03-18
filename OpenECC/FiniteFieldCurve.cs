@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace OpenECC
 {
-    public class FiniteFieldCurve : ICurve
+    /**public class FiniteFieldCurve : ICurve
     {
         private readonly BigInteger _a, _b, _prime;
 
@@ -17,5 +17,5 @@ namespace OpenECC
             _b = b;
             _prime = prime;
         }
-    }
+    }*/
 }
