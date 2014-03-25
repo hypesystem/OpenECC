@@ -36,6 +36,11 @@ namespace OpenECC
         {
             return p.Negate();
         }
+
+        public static Point operator -(Point p, Point q)
+        {
+            return p + (-q);
+        }
         #endregion
     }
 }
