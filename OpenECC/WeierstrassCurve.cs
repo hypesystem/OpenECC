@@ -47,5 +47,18 @@ namespace OpenECC
                 return _prime;
             }
         }
+
+        #region comparison
+        public override bool Equals(object obj)
+        {
+            if (obj is WeierstrassCurve)
+            {
+                var curve = obj as WeierstrassCurve;
+
+                if (this.A == curve.A && this.B == curve.B && this.Prime == curve.Prime) return true;
+            }
+            return false;
+        }
+        #endregion
     }
 }
