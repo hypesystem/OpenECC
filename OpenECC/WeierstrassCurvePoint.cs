@@ -92,5 +92,19 @@ namespace OpenECC
 
             return new WeierstrassCurvePoint(X, -Y, _curve);
         }
+
+        #region comparison
+
+        public override bool Equals(object obj)
+        {
+            if (obj is WeierstrassCurvePoint)
+            {
+                var q = obj as WeierstrassCurvePoint;
+                if (this._curve == q._curve && this.X == q.X && this.Y == q.Y) return true;
+            }
+            return false;
+        }
+
+        #endregion
     }
 }

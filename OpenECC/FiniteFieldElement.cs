@@ -141,5 +141,20 @@ namespace OpenECC
         }
 
         #endregion
+
+        #region comparison
+
+        public override bool Equals(object obj)
+        {
+            if (obj is FiniteFieldElement)
+            {
+                var y = obj as FiniteFieldElement;
+
+                if (this.Q == y.Q && this.X == y.X) return true;
+            }
+            return false;
+        }
+
+        #endregion
     }
 }
