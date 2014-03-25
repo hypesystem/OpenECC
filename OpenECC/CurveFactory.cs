@@ -12,9 +12,11 @@ namespace OpenECC
 
         /// <summary>
         /// y^2 = x^3+0x+7 over Fp where p = 2^256 - 2^32 - 977
-        /// (a = 0, b = 7)
+        /// (Weierstrass curve with a = 0, b = 7)
+        /// This curve is used in the Bitcoin implementation.
         /// </summary>
-        public static ICurve secp256k1
+        [Obsolete("This curve is not safe - see http://safecurves.cr.yp.to")]
+        public static WeierstrassCurve secp256k1
         {
             get
             {
@@ -24,13 +26,5 @@ namespace OpenECC
                 return new WeierstrassCurve(new BigInteger(0), new BigInteger(7), p);
             }
         }
-
-        /*
-         * TODO: Implement this.
-        public static ICurve WeierstrassFromMontgomeryCurve(MontgomeryCurve _mcurve)
-        {
-
-        }
-        */
     }
 }
