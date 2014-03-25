@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace OpenECC
 {
@@ -12,8 +13,8 @@ namespace OpenECC
         public abstract FiniteFieldElement Y { get; }
 
         public abstract Point Add(Point q);
-        public abstract Point Multiply(Point q);
-        public abstract Point Exponentiate(int x);
+        public abstract Point Multiply(BigInteger q);
+        public abstract Point Exponentiate(BigInteger x);
         public abstract Point Negate();
 
         #region operators
@@ -22,12 +23,12 @@ namespace OpenECC
             return p.Add(q);
         }
 
-        public static Point operator *(Point p, Point q)
+        public static Point operator *(Point p, BigInteger q)
         {
             return p.Multiply(q);
         }
 
-        public static Point operator ^(Point p, int x)
+        public static Point operator ^(Point p, BigInteger x)
         {
             return p.Exponentiate(x);
         }

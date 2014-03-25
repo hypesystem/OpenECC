@@ -69,19 +69,19 @@ namespace OpenECC
             return new WeierstrassCurvePoint(x3, y3, _curve);
         }
 
-        public override Point Multiply(Point q)
+        public override Point Multiply(BigInteger x)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Point Exponentiate(int x)
-        {
-            Point tmp = this;
+            Point result = this;
             for (int i = 1; i < x; i++)
             {
-                tmp = tmp * this;
+                result = result + this;
             }
-            return tmp;
+            return result;
+        }
+
+        public override Point Exponentiate(BigInteger x)
+        {
+            throw new NotImplementedException();
         }
 
         public override Point Negate()

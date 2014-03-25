@@ -39,19 +39,14 @@ namespace OpenECC
             throw new NotImplementedException();
         }
 
-        public override Point Multiply(Point q)
+        public override Point Multiply(BigInteger x)
         {
             throw new NotImplementedException();
         }
 
-        public override Point Exponentiate(int x)
+        public override Point Exponentiate(BigInteger x)
         {
-            Point tmp = this;
-            for (int i = 0; i < x; i++)
-            {
-                tmp = tmp * this;
-            }
-            return tmp;
+            throw new NotImplementedException();
         }
 
         public override Point Negate()
