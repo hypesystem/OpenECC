@@ -17,8 +17,8 @@ namespace OpenECC
 
         public FiniteFieldElement(BigInteger value, BigInteger prime)
         {
-            Org.BouncyCastle.Math.BigInteger bouncy_q = value.ToBouncyCastleBigInteger();
-            Org.BouncyCastle.Math.BigInteger bouncy_x = prime.ToBouncyCastleBigInteger();
+            Org.BouncyCastle.Math.BigInteger bouncy_q = prime.ToBouncyCastleBigInteger();
+            Org.BouncyCastle.Math.BigInteger bouncy_x = value.ToBouncyCastleBigInteger();
             _field = new FpFieldElement(bouncy_q, bouncy_x);
         }
 
