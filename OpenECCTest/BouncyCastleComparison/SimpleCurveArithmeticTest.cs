@@ -27,9 +27,16 @@ namespace OpenECCTest.BouncyCastleComparison
             BCSimplePoint4 = BCSimpleCurve.CreatePoint(new Org.BouncyCastle.Math.BigInteger("14"), new Org.BouncyCastle.Math.BigInteger("6"), false);
         }
 
+        private bool PointsAreEqual(Org.BouncyCastle.Math.EC.ECPoint bcp, OpenECC.Point oeccp)
+        {
+            return bcp.X.ToBigInteger().ToString().Equals(oeccp.X.Value.ToString()) &&
+                bcp.Y.ToBigInteger().ToString().Equals(oeccp.Y.Value.ToString());
+        }
+
         [TestMethod]
         public void TestSimpleCurveAddInfinity()
         {
+            //Document that BouncyCastle does the right thing.
             var bc_point = BCSimplePoint1.Add(BCSimpleCurve.Infinity);
             Assert.AreEqual(BCSimplePoint1, bc_point);
 
@@ -43,8 +50,7 @@ namespace OpenECCTest.BouncyCastleComparison
             var bc_point = BCSimplePoint1.Add(BCSimplePoint2);
             var oecc_point = OpenECCSimplePoint1 + OpenECCSimplePoint2;
 
-            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.Value.ToString());
-            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.Value.ToString());
+            Assert.IsTrue(PointsAreEqual(bc_point, oecc_point));
         }
 
         [TestMethod]
@@ -53,20 +59,25 @@ namespace OpenECCTest.BouncyCastleComparison
             var bc_point = BCSimplePoint1.Add(BCSimplePoint1);
             var oecc_point = OpenECCSimplePoint1 + OpenECCSimplePoint1;
 
-            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.Value.ToString());
-            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.Value.ToString());
+            Assert.IsTrue(PointsAreEqual(bc_point, oecc_point));
         }
 
         [TestMethod]
         public void TestSimpleCurveSubtraction()
         {
-            throw new NotImplementedException();
+            var bc_point = BCSimplePoint3.Subtract(BCSimplePoint4);
+            var oecc_point = OpenECCSimplePoint3 - OpenECCSimplePoint4;
+
+            Assert.IsTrue(PointsAreEqual(bc_point, oecc_point));
         }
 
         [TestMethod]
         public void TestSimpleCurveMultiplication()
         {
-            throw new NotImplementedException();
+            var bc_point = BCSimplePoint2.Multiply(new Org.BouncyCastle.Math.BigInteger("10"));
+            var oecc_point = OpenECCSimplePoint2 * (new System.Numerics.BigInteger(10));
+
+            Assert.IsTrue(PointsAreEqual(bc_point, oecc_point));
         }
 
         [TestMethod]
