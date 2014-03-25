@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigIntegerConversion.cs" />
     <Compile Include="InvalidCurveException.cs" />
     <Compile Include="WeierstrassCurvePoint.cs" />
     <Compile Include="CurveFactory.cs" />

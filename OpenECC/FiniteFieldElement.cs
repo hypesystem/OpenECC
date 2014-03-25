@@ -17,8 +17,8 @@ namespace OpenECC
 
         public FiniteFieldElement(BigInteger x, BigInteger q)
         {
-            Org.BouncyCastle.Math.BigInteger bouncy_q = ConvertCSharpToBouncyCastleBigInteger(q);
-            Org.BouncyCastle.Math.BigInteger bouncy_x = ConvertCSharpToBouncyCastleBigInteger(x);
+            Org.BouncyCastle.Math.BigInteger bouncy_q = q.ToBouncyCastleBigInteger();
+            Org.BouncyCastle.Math.BigInteger bouncy_x = x.ToBouncyCastleBigInteger();
             _field = new FpFieldElement(bouncy_q, bouncy_x);
         }
 
@@ -30,7 +30,7 @@ namespace OpenECC
         {
             get
             {
-                return ConvertBouncyCastleToCSharpBigInteger(_field.Q);
+                return _field.Q.ToNativeBigInteger();
             }
         }
 
@@ -38,21 +38,9 @@ namespace OpenECC
         {
             get
             {
-                return ConvertBouncyCastleToCSharpBigInteger(_field.ToBigInteger());
+                return _field.ToBigInteger().ToNativeBigInteger();
             }
         }
-
-        #region BigIntegerConversion
-        private BigInteger ConvertBouncyCastleToCSharpBigInteger(Org.BouncyCastle.Math.BigInteger i)
-        {
-            return BigInteger.Parse(i.ToString());
-        }
-
-        private Org.BouncyCastle.Math.BigInteger ConvertCSharpToBouncyCastleBigInteger(BigInteger i)
-        {
-            return new Org.BouncyCastle.Math.BigInteger(i.ToString());
-        }
-        #endregion
 
         #region Arithmetic Wrapping
 
