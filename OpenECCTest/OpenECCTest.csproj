@@ -55,7 +55,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BouncyCastleComparison\ArithmeticTest.cs" />
+    <Compile Include="BouncyCastleComparison\Secp256k1ArithmeticTest.cs" />
+    <Compile Include="BouncyCastleComparison\SimpleCurveArithmeticTest.cs" />
     <Compile Include="WeierstrassCurvePointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

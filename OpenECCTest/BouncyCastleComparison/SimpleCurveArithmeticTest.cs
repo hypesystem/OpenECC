@@ -4,11 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace OpenECCTest.BouncyCastleComparison
 {
     [TestClass]
-    public class ArithmeticTest
+    public class SimpleCurveArithmeticTest
     {
-        OpenECC.WeierstrassCurve OpenECCSimpleCurve, OpenECCSecp256k1;
+        OpenECC.WeierstrassCurve OpenECCSimpleCurve;
         OpenECC.WeierstrassCurvePoint OpenECCSimplePoint1, OpenECCSimplePoint2, OpenECCSimplePoint3, OpenECCSimplePoint4;
-        Org.BouncyCastle.Math.EC.FpCurve BCSimpleCurve, BCSecp256k1;
+        Org.BouncyCastle.Math.EC.FpCurve BCSimpleCurve;
         Org.BouncyCastle.Math.EC.ECPoint BCSimplePoint1, BCSimplePoint2, BCSimplePoint3, BCSimplePoint4;
 
         [TestInitialize]
@@ -26,13 +26,6 @@ namespace OpenECCTest.BouncyCastleComparison
             BCSimplePoint3 = BCSimpleCurve.CreatePoint(new Org.BouncyCastle.Math.BigInteger("13"), new Org.BouncyCastle.Math.BigInteger("6"), false);
             BCSimplePoint4 = BCSimpleCurve.CreatePoint(new Org.BouncyCastle.Math.BigInteger("14"), new Org.BouncyCastle.Math.BigInteger("6"), false);
         }
-        
-        /*[TestInitialize]
-        public void SetUpSecp256k1()
-        {
-            OpenECCSecp256k1 = OpenECC.CurveFactory.secp256k1;
-            BCSecp256k1 = new Org.BouncyCastle.Math.EC.FpCurve( ... );
-        }*/
 
         [TestMethod]
         public void TestSimpleCurveAddInfinity()
