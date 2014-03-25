@@ -63,5 +63,23 @@ namespace OpenECCTest.BouncyCastleComparison
             Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.X.ToString());
             Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.X.ToString());
         }
+
+        [TestMethod]
+        public void TestSimpleCurveSubtraction()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void TestSimpleCurveMultiplication()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void TestSimpleCurveExponentiation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
