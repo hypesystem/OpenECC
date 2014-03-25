@@ -43,8 +43,8 @@ namespace OpenECCTest.BouncyCastleComparison
             var bc_point = BCSimplePoint1.Add(BCSimplePoint2);
             var oecc_point = OpenECCSimplePoint1 + OpenECCSimplePoint2;
 
-            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.X.ToString());
-            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.X.ToString());
+            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.Value.ToString());
+            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.Value.ToString());
         }
 
         [TestMethod]
@@ -53,8 +53,8 @@ namespace OpenECCTest.BouncyCastleComparison
             var bc_point = BCSimplePoint1.Add(BCSimplePoint1);
             var oecc_point = OpenECCSimplePoint1 + OpenECCSimplePoint1;
 
-            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.X.ToString());
-            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.X.ToString());
+            Assert.AreEqual(bc_point.X.ToBigInteger().ToString(), oecc_point.X.Value.ToString());
+            Assert.AreEqual(bc_point.Y.ToBigInteger().ToString(), oecc_point.Y.Value.ToString());
         }
 
         [TestMethod]

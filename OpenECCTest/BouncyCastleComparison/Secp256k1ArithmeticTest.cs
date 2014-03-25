@@ -28,8 +28,8 @@ namespace OpenECCTest.BouncyCastleComparison
         [TestMethod]
         public void TestOpenECCGeneratorIsCorrect()
         {
-            Assert.AreEqual(OpenECCGenerator.X.X.ToString(), BCGenerator.X.ToBigInteger().ToString());
-            Assert.AreEqual(OpenECCGenerator.Y.X.ToString(), BCGenerator.Y.ToBigInteger().ToString());
+            Assert.AreEqual(OpenECCGenerator.X.Value.ToString(), BCGenerator.X.ToBigInteger().ToString());
+            Assert.AreEqual(OpenECCGenerator.Y.Value.ToString(), BCGenerator.Y.ToBigInteger().ToString());
         }
     }
 }

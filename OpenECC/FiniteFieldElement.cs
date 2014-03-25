@@ -15,10 +15,10 @@ namespace OpenECC
     {
         private FpFieldElement _field;
 
-        public FiniteFieldElement(BigInteger x, BigInteger q)
+        public FiniteFieldElement(BigInteger value, BigInteger prime)
         {
-            Org.BouncyCastle.Math.BigInteger bouncy_q = q.ToBouncyCastleBigInteger();
-            Org.BouncyCastle.Math.BigInteger bouncy_x = x.ToBouncyCastleBigInteger();
+            Org.BouncyCastle.Math.BigInteger bouncy_q = value.ToBouncyCastleBigInteger();
+            Org.BouncyCastle.Math.BigInteger bouncy_x = prime.ToBouncyCastleBigInteger();
             _field = new FpFieldElement(bouncy_q, bouncy_x);
         }
 
@@ -26,7 +26,7 @@ namespace OpenECC
             _field = innerField;
         }
 
-        public BigInteger Q
+        public BigInteger Prime
         {
             get
             {
@@ -34,7 +34,7 @@ namespace OpenECC
             }
         }
 
-        public BigInteger X
+        public BigInteger Value
         {
             get
             {
@@ -69,7 +69,7 @@ namespace OpenECC
 
         public FiniteFieldElement Multiply(int x)
         {
-            var xAsFiniteFieldElement = new FiniteFieldElement(new BigInteger(x), Q);
+            var xAsFiniteFieldElement = new FiniteFieldElement(new BigInteger(x), Prime);
             return Multiply(xAsFiniteFieldElement);
         }
 
@@ -138,7 +138,7 @@ namespace OpenECC
             {
                 var y = obj as FiniteFieldElement;
 
-                if (this.Q == y.Q && this.X == y.X) return true;
+                if (this.Prime == y.Prime && this.Value == y.Value) return true;
             }
             return false;
         }

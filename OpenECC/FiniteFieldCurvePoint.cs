@@ -19,7 +19,7 @@ namespace OpenECC
         {
             _x = x;
             _y = y;
-            _z = new FiniteFieldElement(x.X, new BigInteger(1));
+            _z = new FiniteFieldElement(x.Value, new BigInteger(1));
             _curve = curve;
         }
 
