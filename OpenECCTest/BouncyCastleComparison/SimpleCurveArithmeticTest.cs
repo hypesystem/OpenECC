@@ -79,11 +79,5 @@ namespace OpenECCTest.BouncyCastleComparison
 
             Assert.IsTrue(PointsAreEqual(bc_point, oecc_point));
         }
-
-        [TestMethod]
-        public void TestSimpleCurveExponentiation()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -14,7 +14,6 @@ namespace OpenECC
 
         public abstract Point Add(Point q);
         public abstract Point Multiply(BigInteger q);
-        public abstract Point Exponentiate(BigInteger x);
         public abstract Point Negate();
 
         #region operators
@@ -26,11 +25,6 @@ namespace OpenECC
         public static Point operator *(Point p, BigInteger q)
         {
             return p.Multiply(q);
-        }
-
-        public static Point operator ^(Point p, BigInteger x)
-        {
-            return p.Exponentiate(x);
         }
 
         public static Point operator -(Point p)

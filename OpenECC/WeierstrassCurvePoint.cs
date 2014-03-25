@@ -79,11 +79,6 @@ namespace OpenECC
             return result;
         }
 
-        public override Point Exponentiate(BigInteger x)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Point Negate()
         {
             //-infinity = infinity
