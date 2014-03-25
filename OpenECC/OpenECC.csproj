@@ -47,11 +47,9 @@
     <Compile Include="InvalidCurveException.cs" />
     <Compile Include="WeierstrassCurvePoint.cs" />
     <Compile Include="CurveFactory.cs" />
-    <Compile Include="FiniteFieldCurve.cs" />
     <Compile Include="FiniteFieldElement.cs" />
     <Compile Include="ICurve.cs" />
     <Compile Include="Point.cs" />
-    <Compile Include="FiniteFieldCurvePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeierstrassCurve.cs" />
   </ItemGroup>
