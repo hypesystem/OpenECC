@@ -45,12 +45,12 @@ namespace OpenECC
         #region BigIntegerConversion
         private BigInteger ConvertBouncyCastleToCSharpBigInteger(Org.BouncyCastle.Math.BigInteger i)
         {
-            throw new NotImplementedException();
+            return BigInteger.Parse(i.ToString());
         }
 
         private Org.BouncyCastle.Math.BigInteger ConvertCSharpToBouncyCastleBigInteger(BigInteger i)
         {
-            throw new NotImplementedException();
+            return new Org.BouncyCastle.Math.BigInteger(i.ToString());
         }
         #endregion
 

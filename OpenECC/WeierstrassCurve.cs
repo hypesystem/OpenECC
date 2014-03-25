@@ -13,12 +13,15 @@ namespace OpenECC
     public class WeierstrassCurve : ICurve
     {
         private BigInteger _a, _b, _prime;
+        private readonly WeierstrassCurvePoint _infinity;
+        public WeierstrassCurvePoint Infinity { get { return _infinity; } }
 
         public WeierstrassCurve(BigInteger a, BigInteger b, BigInteger prime)
         {
             _a = a;
             _b = b;
             _prime = prime;
+            _infinity = new WeierstrassCurvePoint(null, null, this);
         }
 
         public BigInteger A

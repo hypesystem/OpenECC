@@ -12,14 +12,11 @@ namespace OpenECC
     /// </summary>
     public class WeierstrassCurvePoint : Point
     {
-        private static readonly WeierstrassCurvePoint _infinity = new WeierstrassCurvePoint(null,null,null);
-        private WeierstrassCurvePoint Infinity { get { return _infinity; } }
-
-        private readonly FiniteFieldElement _x, _y, _z;
+        private readonly FiniteFieldElement _x, _y;
         private readonly WeierstrassCurve _curve;
 
         public WeierstrassCurvePoint(BigInteger x, BigInteger y, ICurve curve)
-            : this(new FiniteFieldElement(x, curve.Prime), new FiniteFieldElement(y, curve.Prime), curve) { }
+            : this(new FiniteFieldElement(x, curve.Prime), new FiniteFieldElement(y, curve.Prime), curve) {  }
 
         public WeierstrassCurvePoint(FiniteFieldElement x, FiniteFieldElement y, ICurve curve)
         {
@@ -28,7 +25,6 @@ namespace OpenECC
 
             _x = x;
             _y = y;
-            _z = new FiniteFieldElement(x.X, new BigInteger(1));
             _curve = curve as WeierstrassCurve;
         }
 
@@ -46,12 +42,12 @@ namespace OpenECC
                 throw new InvalidCurveException("Cannot add two points on different curves.");
 
             //p + infinity = p
-            if (q == Infinity)
+            if (q == _curve.Infinity)
                 return this;
 
             //p + -p = infinity
             if (this == -q)
-                return Infinity;
+                return _curve.Infinity;
 
             FiniteFieldElement x3, y3;
 
@@ -66,7 +62,7 @@ namespace OpenECC
             else
             {
                 //adding two distinct points.
-                var lambda = (q.Y - this.Y / q.X - this.X);
+                var lambda = (q.Y - this.Y) / (q.X - this.X);
                 x3 = (lambda ^ 2) - this.X - q.X;
                 y3 = (lambda) * (this.X - x3) - this.Y;
             }
@@ -91,7 +87,7 @@ namespace OpenECC
         public override Point Negate()
         {
             //-infinity = infinity
-            if (this == Infinity)
+            if (this == _curve.Infinity)
                 return this;
 
             return new WeierstrassCurvePoint(X, -Y, _curve);

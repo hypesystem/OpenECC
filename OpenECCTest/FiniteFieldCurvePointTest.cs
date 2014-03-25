@@ -14,12 +14,12 @@ namespace OpenECCTest
         {
             throw new NotImplementedException();
         }
-
+        /*
         [TestMethod]
         public void TestNegationCircular()
         {
             var neg_p = -p;
             Assert.AreEqual(p, -neg_p);
-        }
+        }*/
     }
 }
