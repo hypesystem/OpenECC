@@ -18,6 +18,9 @@ namespace OpenECC
         private readonly FiniteFieldElement _x, _y, _z;
         private readonly WeierstrassCurve _curve;
 
+        public WeierstrassCurvePoint(BigInteger x, BigInteger y, ICurve curve)
+            : this(new FiniteFieldElement(x, curve.Prime), new FiniteFieldElement(y, curve.Prime), curve) { }
+
         public WeierstrassCurvePoint(FiniteFieldElement x, FiniteFieldElement y, ICurve curve)
         {
             if (!(curve is WeierstrassCurve))
