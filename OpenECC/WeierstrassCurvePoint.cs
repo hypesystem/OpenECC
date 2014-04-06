@@ -95,7 +95,7 @@ namespace OpenECC
             if (obj is WeierstrassCurvePoint)
             {
                 var q = obj as WeierstrassCurvePoint;
-                if (this._curve == q._curve && this.X == q.X && this.Y == q.Y) return true;
+                if (this._curve.Equals(q._curve) && this.X.Equals(q.X) && this.Y.Equals(q.Y)) return true;
             }
             return false;
         }
