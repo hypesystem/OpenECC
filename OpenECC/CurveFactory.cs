@@ -20,8 +20,8 @@ namespace OpenECC
         {
             get
             {
-                var var2to256 = new BigInteger(2) ^ new BigInteger(256);
-                var var2to32 = new BigInteger(2) ^ new BigInteger(32);
+                var var2to256 = BigInteger.Pow(new BigInteger(2), 256);
+                var var2to32 = BigInteger.Pow(new BigInteger(2), 32);
                 var p = var2to256 - var2to32 - new BigInteger(977);
                 return new WeierstrassCurve(new BigInteger(0), new BigInteger(7), p);
             }

@@ -15,6 +15,7 @@ namespace OpenECCTest.BouncyCastleComparison
         public void SetUpSecp256k1()
         {
             OpenECCSecp256k1 = OpenECC.CurveFactory.secp256k1;
+
             OpenECCGenerator = new OpenECC.WeierstrassCurvePoint(
                 System.Numerics.BigInteger.Parse("55066263022277343669578718895168534326250603453777594175500187360389116729240"),
                 System.Numerics.BigInteger.Parse("32670510020758816978083085130507043184471273380659243275938904335757337482424"),
