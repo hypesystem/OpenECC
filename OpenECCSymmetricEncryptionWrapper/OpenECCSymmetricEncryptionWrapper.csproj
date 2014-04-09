@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{992D8291-E489-402E-98C0-210112AE2DEB}</ProjectGuid>
+    <ProjectGuid>{67A8E411-AB59-41C1-969A-007F7C841495}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenECC.Encryption</RootNamespace>
-    <AssemblyName>OpenECCEncryption</AssemblyName>
+    <RootNamespace>OpenECC.SymmetricEncryptionWrapper</RootNamespace>
+    <AssemblyName>OpenECCSymmetricEncryptionWrapper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,26 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainParameters.cs" />
-    <Compile Include="EciesCiphertext.cs" />
-    <Compile Include="EciesEncryptor.cs" />
     <Compile Include="ICiphertext.cs" />
-    <Compile Include="IEncryptor.cs" />
+    <Compile Include="IKey.cs" />
+    <Compile Include="IMac.cs" />
+    <Compile Include="IMacGenerator.cs" />
     <Compile Include="IPlaintext.cs" />
-    <Compile Include="KeyPair.cs" />
-    <Compile Include="PrivateKey.cs" />
-    <Compile Include="PublicKey.cs" />
+    <Compile Include="ISymmetricEncryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj">
-      <Project>{67a8e411-ab59-41c1-969a-007f7c841495}</Project>
-      <Name>OpenECCSymmetricEncryptionWrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenECC\OpenECC.csproj">
-      <Project>{f4f98d33-a39c-4ce6-b01d-03d51753d24f}</Project>
-      <Name>OpenECC</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

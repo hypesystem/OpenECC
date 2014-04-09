@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenECC;
+using System.Numerics;
 
 namespace OpenECC.Encryption
 {
-    public class PublicKey
+    public class PrivateKey
     {
-        private readonly Point _inner_point;
+        private readonly BigInteger _number;
 
-        public PublicKey(Point p)
+        public PrivateKey(BigInteger number)
         {
-            _inner_point = p;
+            _number = number;
         }
 
-        internal Point Point
+        public BigInteger Value
         {
             get
             {
-                return _inner_point;
+                return _number;
             }
         }
     }
