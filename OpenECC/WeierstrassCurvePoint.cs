@@ -42,17 +42,17 @@ namespace OpenECC
                 throw new InvalidCurveException("Cannot add two points on different curves.");
 
             //p + infinity = p
-            if (q == _curve.Infinity)
+            if (q.Equals(_curve.Infinity))
                 return this;
 
             //p + -p = infinity
-            if (this == -q)
+            if (this.Equals(-q))
                 return _curve.Infinity;
 
             FiniteFieldElement x3, y3;
 
             //if p + q where p = q, do point doubling
-            if (this == q)
+            if (this.Equals(q))
             {
                 var a = new FiniteFieldElement(_curve.A, _curve.Prime);
                 var lambda = ((3 * ((this.X) ^ 2) + a) / (2 * this.Y));
@@ -82,7 +82,7 @@ namespace OpenECC
         public override Point Negate()
         {
             //-infinity = infinity
-            if (this == _curve.Infinity)
+            if (this.Equals(_curve.Infinity))
                 return this;
 
             return new WeierstrassCurvePoint(X, -Y, _curve);
