@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HmacGenerator.cs" />
+    <Compile Include="HmacKey.cs" />
     <Compile Include="IKey.cs" />
-    <Compile Include="IMac.cs" />
-    <Compile Include="IMacGenerator.cs" />
     <Compile Include="ISymmetricEncryptor.cs" />
+    <Compile Include="Mac.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RijndaelHmacKeyPair.cs" />
     <Compile Include="RijndaelKey.cs" />

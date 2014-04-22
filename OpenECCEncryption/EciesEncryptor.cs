@@ -13,9 +13,9 @@ namespace OpenECC.Encryption
     {
         private DomainParameters _parameters;
         private ISymmetricEncryptor _enc;
-        private IMacGenerator _mac;
+        private HmacGenerator _mac;
 
-        public EciesEncryptor(DomainParameters parameters, ISymmetricEncryptor enc, IMacGenerator mac)
+        public EciesEncryptor(DomainParameters parameters, ISymmetricEncryptor enc, HmacGenerator mac)
         {
             _parameters = parameters;
             _enc = enc;
@@ -45,7 +45,8 @@ namespace OpenECC.Encryption
             DeriveKeys(Z.X.Value, R, out k1, out k2);
 
             var C = _enc.Encrypt(k1, m);
-            var t = _mac.Mac(k2, C);
+            var t = _mac.Mac(C.ToString()); //TODO: ToString implementation and stuff...
+            throw new NotImplementedException();
             return new EciesCiphertext(R, C, t);
         }
 

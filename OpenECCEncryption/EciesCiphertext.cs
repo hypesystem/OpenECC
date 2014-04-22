@@ -10,7 +10,7 @@ namespace OpenECC.Encryption
 {
     public class EciesCiphertext : ICiphertext
     {
-        public EciesCiphertext(Point r, ICiphertext c, IMac mac)
+        public EciesCiphertext(Point r, ICiphertext c, Mac mac)
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace OpenECC.Encryption.SymmetricWrappers
 {
-    public interface IMac
+    public class Mac
     {
+        private byte[] _bytes;
+
+        public Mac(byte[] bytes)
+        {
+            _bytes = bytes;
+        }
     }
 }
