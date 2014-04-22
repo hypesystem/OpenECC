@@ -43,6 +43,8 @@
     <Compile Include="DomainParameters.cs" />
     <Compile Include="EciesCiphertext.cs" />
     <Compile Include="EciesEncryptor.cs" />
+    <Compile Include="ElGamalCiphertext.cs" />
+    <Compile Include="ElGamalEncryptor.cs" />
     <Compile Include="IEncryptor.cs" />
     <Compile Include="KeyPair.cs" />
     <Compile Include="PrivateKey.cs" />
