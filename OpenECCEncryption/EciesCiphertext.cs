@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenECC.SymmetricEncryptionWrapper;
+using OpenECC.Encryption.SymmetricWrappers;
 using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption
