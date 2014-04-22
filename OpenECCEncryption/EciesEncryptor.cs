@@ -76,7 +76,6 @@ namespace OpenECC.Encryption
 
         public Plaintext Decrypt(PrivateKey d, Ciphertext c)
         {
-            Embedded
             throw new NotImplementedException();
         }
     }
