@@ -35,11 +35,13 @@ namespace OpenECC.Encryption
                 Z = q * k * _parameters.Cofactor;
             }
 
-            IKey k1;
+            Key k1;
             HmacKey k2;
             DeriveKeys(Z.X.Value, R, out k1, out k2);
 
-            var aes = new RijndaelSymmetricEncryptor(k1, k1); //TODO: IV!
+            var iv = new IV(new BigInteger(0));
+
+            var aes = new RijndaelSymmetricEncryptor(k1, iv); //TODO: IV!
             throw new NotImplementedException();
             var c = aes.Encrypt(m);
 
@@ -58,7 +60,7 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        private void DeriveKeys(BigInteger z_x, Point r, out IKey k1, out HmacKey k2)
+        private void DeriveKeys(BigInteger z_x, Point r, out Key k1, out HmacKey k2)
         {
             throw new NotImplementedException();
         }

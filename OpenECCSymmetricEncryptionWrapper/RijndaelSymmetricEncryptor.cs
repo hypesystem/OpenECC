@@ -13,11 +13,8 @@ namespace OpenECC.Encryption.SymmetricWrappers
     {
         private RijndaelManaged rijndael;
 
-        public RijndaelSymmetricEncryptor(IKey k, IKey iv)
-        {
-            if (!(k is RijndaelKey)) throw new ArgumentException("Key must be a Rijndael key!", "key");
-
-            rijndael = new RijndaelManaged();
+        public RijndaelSymmetricEncryptor(Key k, IV iv)
+        {rijndael = new RijndaelManaged();
 
             rijndael.IV = iv.ToByteArray();
             rijndael.Key = k.ToByteArray();
