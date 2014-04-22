@@ -13,9 +13,8 @@ namespace OpenECC.Encryption
     {
         private DomainParameters _parameters;
         private ISymmetricEncryptor _enc;
-        private HmacGenerator _mac;
 
-        public EciesEncryptor(DomainParameters parameters, ISymmetricEncryptor enc, HmacGenerator mac)
+        public EciesEncryptor(DomainParameters parameters, ISymmetricEncryptor enc)
         {
             _parameters = parameters;
             _enc = enc;
@@ -41,11 +40,14 @@ namespace OpenECC.Encryption
                 Z = q * k * _parameters.Cofactor;
             }
 
-            IKey k1, k2;
+            IKey k1;
+            HmacKey k2;
             DeriveKeys(Z.X.Value, R, out k1, out k2);
 
             var C = _enc.Encrypt(k1, m);
-            var t = _mac.Mac(C.ToString()); //TODO: ToString implementation and stuff...
+
+            var hmac = new HmacGenerator(k2);
+            var t = hmac.Mac(C.ToString()); //TODO: ToString implementation and stuff...
             throw new NotImplementedException();
             return new EciesCiphertext(R, C, t);
         }
@@ -60,7 +62,7 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        private void DeriveKeys(BigInteger z_x, Point r, out IKey k1, out IKey k2)
+        private void DeriveKeys(BigInteger z_x, Point r, out IKey k1, out HmacKey k2)
         {
             throw new NotImplementedException();
         }
