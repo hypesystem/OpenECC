@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenECC.Encryption.Core;
 
-namespace OpenECC.SymmetricEncryptionWrapper
+namespace OpenECC.Encryption.SymmetricWrappers
 {
     public interface ISymmetricEncryptor
     {
