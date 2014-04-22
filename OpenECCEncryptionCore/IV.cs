@@ -15,5 +15,10 @@ namespace OpenECC.Encryption.Core
         {
             return new BigInteger(ToByteArray());
         }
+
+        public override string ToString()
+        {
+            return ToBigInteger().ToString();
+        }
     }
 }
