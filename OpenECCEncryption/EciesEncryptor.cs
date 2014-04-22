@@ -20,19 +20,19 @@ namespace OpenECC.Encryption
 
         public Ciphertext Encrypt(PublicKey pub, Plaintext m)
         {
-            var q = pub.Point;
+            var public_key = pub.Point;
 
             var k = SelectK(_parameters.N);
 
             var R = _parameters.P * k;
-            var Z = q * k * _parameters.Cofactor;
+            var Z = public_key * k * _parameters.Cofactor;
 
             while (Z == _parameters.Curve.Infinity)
             {
                 k = SelectK(_parameters.N, R);
 
                 R = _parameters.P * k;
-                Z = q * k * _parameters.Cofactor;
+                Z = public_key * k * _parameters.Cofactor;
             }
 
             Key k1;
