@@ -14,7 +14,8 @@ namespace OpenECC.Encryption.SymmetricWrappers
         private RijndaelManaged rijndael;
 
         public RijndaelSymmetricEncryptor(Key k, IV iv)
-        {rijndael = new RijndaelManaged();
+        {
+            rijndael = new RijndaelManaged();
 
             rijndael.IV = iv.ToByteArray();
             rijndael.Key = k.ToByteArray();
