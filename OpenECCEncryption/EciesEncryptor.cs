@@ -37,17 +37,26 @@ namespace OpenECC.Encryption
 
             Key k1;
             HmacKey k2;
-            DeriveKeys(Z.X.Value, R, out k1, out k2);
+            DeriveKeys(Z.X, R, out k1, out k2);
 
+            var ciphertext = SymmetricEncrypt(k1, m);
+            var mac = GenerateMac(k2, ciphertext);
+
+            return new EciesCiphertext(R, ciphertext, mac);
+        }
+
+        private Ciphertext SymmetricEncrypt(Key k, Plaintext m)
+        {
             var iv = new IV(new BigInteger(0));
-
-            var aes = new RijndaelSymmetricEncryptor(k1, iv); //TODO: IV!
+            var aes = new RijndaelSymmetricEncryptor(k, iv); //TODO: IV!
             throw new NotImplementedException();
-            var c = aes.Encrypt(m);
+            return aes.Encrypt(m);
+        }
 
-            var hmac = new HmacGenerator(k2);
-            var t = hmac.Mac(c.ToString());
-            return new EciesCiphertext(R, c, t);
+        private Mac GenerateMac(HmacKey k, ConvertableByteArray data)
+        {
+            var hmac = new HmacGenerator(k);
+            return hmac.Mac(data.ToString());
         }
 
         private BigInteger SelectK(BigInteger n)
@@ -60,13 +69,14 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        private void DeriveKeys(BigInteger z_x, Point r, out Key k1, out HmacKey k2)
+        private void DeriveKeys(FiniteFieldElement z_x, Point r, out Key k1, out HmacKey k2)
         {
             throw new NotImplementedException();
         }
 
         public Plaintext Decrypt(PrivateKey d, Ciphertext c)
         {
+            Embedded
             throw new NotImplementedException();
         }
     }
