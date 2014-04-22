@@ -40,8 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ciphertext.cs" />
-    <Compile Include="ICiphertext.cs" />
-    <Compile Include="IPlaintext.cs" />
     <Compile Include="Plaintext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
