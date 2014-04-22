@@ -9,7 +9,7 @@ namespace OpenECC.Encryption
 {
     public interface IEncryptor
     {
-        ICiphertext Encrypt(PublicKey pub, IPlaintext m);
-        IPlaintext Decrypt(PrivateKey priv, ICiphertext c);
+        Ciphertext Encrypt(PublicKey pub, Plaintext m);
+        Plaintext Decrypt(PrivateKey priv, Ciphertext c);
     }
 }

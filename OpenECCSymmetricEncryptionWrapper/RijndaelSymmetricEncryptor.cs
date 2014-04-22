@@ -1,22 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Security.Cryptography;
 using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption.SymmetricWrappers
 {
-    class RijndaelSymmetricEncryptor : ISymmetricEncryptor
+    /// <summary>
+    /// Adapted code from http://msdn.microsoft.com/en-us/magazine/cc164055.aspx
+    /// via http://stackoverflow.com/questions/273452/using-aes-encryption-in-c-sharp
+    /// </summary>
+    public class RijndaelSymmetricEncryptor : ISymmetricEncryptor
     {
-        public ICiphertext Encrypt(IKey k, IPlaintext m)
+        private RijndaelManaged rijndael;
+
+        public RijndaelSymmetricEncryptor(IKey k, IKey iv)
         {
             if (!(k is RijndaelKey)) throw new ArgumentException("Key must be a Rijndael key!", "key");
 
-            throw new NotImplementedException();
+            rijndael = new RijndaelManaged();
+
+            rijndael.IV = iv.ToByteArray();
+            rijndael.Key = k.ToByteArray();
         }
 
-        public IPlaintext Decrypt(IKey k, ICiphertext c)
+        public Ciphertext Encrypt(Plaintext m)
+        {
+            ICryptoTransform encryptor = rijndael.CreateEncryptor(rijndael.Key, rijndael.IV);
+            byte[] bytes;
+
+            using (MemoryStream msEncrypt = new MemoryStream())
+            {
+                using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                {
+                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                    {
+
+                        //Write all data to the stream.
+                        swEncrypt.Write(m.ToString());
+                    }
+                    bytes = msEncrypt.ToArray();
+                }
+            }
+            return new Ciphertext(bytes);
+        }
+
+        public Plaintext Decrypt(Ciphertext c)
         {
             throw new NotImplementedException();
         }

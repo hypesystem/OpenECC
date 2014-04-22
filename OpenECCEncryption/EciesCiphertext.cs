@@ -8,9 +8,9 @@ using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption
 {
-    public class EciesCiphertext : ICiphertext
+    public class EciesCiphertext : Ciphertext
     {
-        public EciesCiphertext(Point r, ICiphertext c, Mac mac)
+        public EciesCiphertext(Point r, Ciphertext c, Mac mac) : base(c.ToByteArray())
         {
             throw new NotImplementedException();
         }

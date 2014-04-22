@@ -8,6 +8,16 @@ namespace OpenECC.Encryption.SymmetricWrappers
 {
     class RijndaelKey : IKey
     {
+        private byte[] _bytes;
 
+        public RijndaelKey(byte[] bytes)
+        {
+            _bytes = bytes;
+        }
+
+        public byte[] ToByteArray()
+        {
+            return _bytes;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace OpenECC.Encryption.SymmetricWrappers
 {
     public interface ISymmetricEncryptor
     {
-        ICiphertext Encrypt(IKey k, IPlaintext m);
-        IPlaintext Decrypt(IKey k, ICiphertext c);
+        Ciphertext Encrypt(Plaintext m);
+        Plaintext Decrypt(Ciphertext c);
     }
 }

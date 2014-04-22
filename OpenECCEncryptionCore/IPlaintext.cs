@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenECC.Encryption.Core
 {
+    [Obsolete("Use Plaintext")]
     public interface IPlaintext
     {
     }

@@ -8,5 +8,6 @@ namespace OpenECC.Encryption.SymmetricWrappers
 {
     public interface IKey
     {
+        byte[] ToByteArray();
     }
 }

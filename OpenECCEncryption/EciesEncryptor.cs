@@ -12,18 +12,14 @@ namespace OpenECC.Encryption
     public class EciesEncryptor : IEncryptor
     {
         private DomainParameters _parameters;
-        private ISymmetricEncryptor _enc;
 
-        public EciesEncryptor(DomainParameters parameters, ISymmetricEncryptor enc)
+        public EciesEncryptor(DomainParameters parameters)
         {
             _parameters = parameters;
-            _enc = enc;
         }
 
-        public ICiphertext Encrypt(PublicKey pub, IPlaintext plain)
+        public Ciphertext Encrypt(PublicKey pub, Plaintext m)
         {
-            var m = plain;
-
             var q = pub.Point;
 
             var k = SelectK(_parameters.N);
@@ -43,12 +39,14 @@ namespace OpenECC.Encryption
             HmacKey k2;
             DeriveKeys(Z.X.Value, R, out k1, out k2);
 
-            var C = _enc.Encrypt(k1, m);
+            var aes = new RijndaelSymmetricEncryptor(k1, k1); //TODO: IV!
+            throw new NotImplementedException();
+            var c = aes.Encrypt(m);
 
             var hmac = new HmacGenerator(k2);
-            var t = hmac.Mac(C.ToString()); //TODO: ToString implementation and stuff...
+            var t = hmac.Mac(c.ToString()); //TODO: ToString implementation and stuff...
             throw new NotImplementedException();
-            return new EciesCiphertext(R, C, t);
+            return new EciesCiphertext(R, c, t);
         }
 
         private BigInteger SelectK(BigInteger n)
@@ -66,7 +64,7 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        public IPlaintext Decrypt(PrivateKey d, ICiphertext c)
+        public Plaintext Decrypt(PrivateKey d, Ciphertext c)
         {
             throw new NotImplementedException();
         }
