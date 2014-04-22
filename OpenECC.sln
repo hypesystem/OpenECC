@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenECCEncryption", "OpenEC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenECCSymmetricEncryptionWrapper", "OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj", "{67A8E411-AB59-41C1-969A-007F7C841495}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenECCEncryptionCore", "OpenECCEncryptionCore\OpenECCEncryptionCore.csproj", "{B8C68960-FF90-46AA-A34F-67FEE5A54190}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{67A8E411-AB59-41C1-969A-007F7C841495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A8E411-AB59-41C1-969A-007F7C841495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A8E411-AB59-41C1-969A-007F7C841495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C68960-FF90-46AA-A34F-67FEE5A54190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C68960-FF90-46AA-A34F-67FEE5A54190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C68960-FF90-46AA-A34F-67FEE5A54190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C68960-FF90-46AA-A34F-67FEE5A54190}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -43,15 +43,17 @@
     <Compile Include="DomainParameters.cs" />
     <Compile Include="EciesCiphertext.cs" />
     <Compile Include="EciesEncryptor.cs" />
-    <Compile Include="ICiphertext.cs" />
     <Compile Include="IEncryptor.cs" />
-    <Compile Include="IPlaintext.cs" />
     <Compile Include="KeyPair.cs" />
     <Compile Include="PrivateKey.cs" />
     <Compile Include="PublicKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenECCEncryptionCore\OpenECCEncryptionCore.csproj">
+      <Project>{b8c68960-ff90-46aa-a34f-67fee5a54190}</Project>
+      <Name>OpenECCEncryptionCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj">
       <Project>{67a8e411-ab59-41c1-969a-007f7c841495}</Project>
       <Name>OpenECCSymmetricEncryptionWrapper</Name>

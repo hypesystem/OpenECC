@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 using OpenECC.SymmetricEncryptionWrapper;
+using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption
 {
@@ -23,7 +24,7 @@ namespace OpenECC.Encryption
 
         public ICiphertext Encrypt(PublicKey pub, IPlaintext plain)
         {
-            var m = plain.ToSymmetricPlaintext();
+            var m = plain;
 
             var q = pub.Point;
 

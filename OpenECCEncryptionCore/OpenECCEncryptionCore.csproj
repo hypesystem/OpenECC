@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67A8E411-AB59-41C1-969A-007F7C841495}</ProjectGuid>
+    <ProjectGuid>{B8C68960-FF90-46AA-A34F-67FEE5A54190}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenECC.Encryption.SymmetricWrappers</RootNamespace>
-    <AssemblyName>OpenECCSymmetricEncryptionWrapper</AssemblyName>
+    <RootNamespace>OpenECC.Encryption.Core</RootNamespace>
+    <AssemblyName>OpenECCEncryptionCore</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,17 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IKey.cs" />
-    <Compile Include="IMac.cs" />
-    <Compile Include="IMacGenerator.cs" />
-    <Compile Include="ISymmetricEncryptor.cs" />
+    <Compile Include="ICiphertext.cs" />
+    <Compile Include="IPlaintext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenECCEncryptionCore\OpenECCEncryptionCore.csproj">
-      <Project>{b8c68960-ff90-46aa-a34f-67fee5a54190}</Project>
-      <Name>OpenECCEncryptionCore</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
