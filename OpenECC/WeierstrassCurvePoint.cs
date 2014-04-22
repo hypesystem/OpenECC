@@ -95,6 +95,14 @@ namespace OpenECC
             if (obj is WeierstrassCurvePoint)
             {
                 var q = obj as WeierstrassCurvePoint;
+
+                //If either coordinate is null, the point must be infinity or inequal.
+                if (this.X == null || this.Y == null || q.X == null || q.Y == null)
+                {
+                    return this == _curve.Infinity && q == _curve.Infinity;
+                }
+
+                //Deep equals
                 return this._curve.Equals(q._curve) && this.X.Equals(q.X) && this.Y.Equals(q.Y);
             }
             return false;
