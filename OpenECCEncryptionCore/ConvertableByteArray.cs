@@ -31,5 +31,20 @@ namespace OpenECC.Encryption.Core
         {
             return _bytes;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ConvertableByteArray)
+            {
+                var cba = obj as ConvertableByteArray;
+                return ToByteArray().Equals(cba.ToByteArray());
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return ToByteArray().GetHashCode();
+        }
     }
 }
