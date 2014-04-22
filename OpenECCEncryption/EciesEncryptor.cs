@@ -18,7 +18,6 @@ namespace OpenECC.Encryption
         {
             _parameters = parameters;
             _enc = enc;
-            _mac = mac;
         }
 
         public ICiphertext Encrypt(PublicKey pub, IPlaintext plain)
