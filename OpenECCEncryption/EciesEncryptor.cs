@@ -44,8 +44,7 @@ namespace OpenECC.Encryption
             var c = aes.Encrypt(m);
 
             var hmac = new HmacGenerator(k2);
-            var t = hmac.Mac(c.ToString()); //TODO: ToString implementation and stuff...
-            throw new NotImplementedException();
+            var t = hmac.Mac(c.ToString());
             return new EciesCiphertext(R, c, t);
         }
 

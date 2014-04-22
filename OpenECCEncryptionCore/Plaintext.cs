@@ -20,6 +20,12 @@ namespace OpenECC.Encryption.Core
             _content = content;
         }
 
+        public Plaintext(byte[] bytes)
+        {
+            throw new NotImplementedException();
+            //BytesToString(bytes);
+        }
+
         public override string ToString()
         {
             return _content;

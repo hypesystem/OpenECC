@@ -57,10 +57,16 @@
   <ItemGroup>
     <Compile Include="BouncyCastleComparison\Secp256k1ArithmeticTest.cs" />
     <Compile Include="BouncyCastleComparison\SimpleCurveArithmeticTest.cs" />
+    <Compile Include="Encryption\Core\CiphertextTest.cs" />
+    <Compile Include="Encryption\Core\PlaintextTest.cs" />
     <Compile Include="WeierstrassCurvePointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenECCEncryptionCore\OpenECCEncryptionCore.csproj">
+      <Project>{b8c68960-ff90-46aa-a34f-67fee5a54190}</Project>
+      <Name>OpenECCEncryptionCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenECC\OpenECC.csproj">
       <Project>{f4f98d33-a39c-4ce6-b01d-03d51753d24f}</Project>
       <Name>OpenECC</Name>

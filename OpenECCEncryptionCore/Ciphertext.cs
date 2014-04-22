@@ -9,6 +9,7 @@ namespace OpenECC.Encryption.Core
     public class Ciphertext
     {
         private byte[] _bytes;
+        private static System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
 
         /// <summary>
         /// Convertable between string and byte array. Primary form is byte array.
@@ -17,6 +18,11 @@ namespace OpenECC.Encryption.Core
         public Ciphertext(byte[] bytes)
         {
             _bytes = bytes;
+        }
+
+        public Ciphertext(string str)
+        {
+            _bytes = encoding.GetBytes(str);
         }
 
         public override string ToString()
