@@ -87,7 +87,46 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        public Plaintext Decrypt(PrivateKey d, Ciphertext c)
+        public Plaintext Decrypt(PrivateKey private_key, Ciphertext ciphertext)
+        {
+            var c = ciphertext as EciesCiphertext;
+            if(c == null) throw new ArgumentException("Ciphertext must be an EciesCiphertext!", "ciphertext");
+
+            if (!ValidEmbeddedPublicKey(c.R))
+            {
+                throw new NotImplementedException();
+                //Should throw more fitting exception
+            }
+
+            var Z = c.R * _parameters.Cofactor * (private_key.Value);
+            if (Z == _parameters.Curve.Infinity)
+            {
+                throw new NotImplementedException();
+                //Should throw more fitting exception
+            }
+
+            Key k1;
+            HmacKey k2;
+            DeriveKeys(Z.X, c.R, out k1, out k2);
+
+            var new_mac = GenerateMac(k2, c.Ciphertext);
+            if (!new_mac.Equals(c.Mac))
+            {
+                throw new NotImplementedException();
+                //Should throw more fitting exception
+            }
+
+            return SymmetricDecrypt(k1, c.Ciphertext);
+
+            throw new NotImplementedException();
+        }
+
+        private bool ValidEmbeddedPublicKey(Point R)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Plaintext SymmetricDecrypt(Key k, Ciphertext c)
         {
             throw new NotImplementedException();
         }
