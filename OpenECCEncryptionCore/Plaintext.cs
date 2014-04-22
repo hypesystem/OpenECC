@@ -6,34 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenECC.Encryption.Core
 {
-    public class Plaintext
+    public class Plaintext : ConvertableByteArray
     {
-        private string _content;
-        private static System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-
-        /// <summary>
-        /// Convertable between string and byte array. Primary form is string.
-        /// </summary>
-        /// <param name="content"></param>
-        public Plaintext(string content)
-        {
-            _content = content;
-        }
-
-        public Plaintext(byte[] bytes)
-        {
-            throw new NotImplementedException();
-            //BytesToString(bytes);
-        }
-
-        public override string ToString()
-        {
-            return _content;
-        }
-
-        public byte[] ToByteArray()
-        {
-            return encoding.GetBytes(_content);
-        }
+        public Plaintext(string content) : base(content) { }
+        public Plaintext(byte[] bytes) : base(bytes) { }
     }
 }

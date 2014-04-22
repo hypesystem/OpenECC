@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenECC.Encryption.Core
 {
-    public class Ciphertext : ConvertableByteArray
+    public class Key : ConvertableByteArray
     {
-        public Ciphertext(byte[] bytes) : base(bytes) { }
-        public Ciphertext(string str) : base(str) { }
+        public Key(string content) : base(content) { }
+        public Key(byte[] bytes) : base(bytes) { }
     }
 }
