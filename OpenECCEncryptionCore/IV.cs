@@ -10,5 +10,10 @@ namespace OpenECC.Encryption.Core
     public class IV : ConvertableByteArray
     {
         public IV(BigInteger i) : base(i.ToByteArray()) { }
+
+        public BigInteger ToBigInteger()
+        {
+            return new BigInteger(ToByteArray());
+        }
     }
 }
