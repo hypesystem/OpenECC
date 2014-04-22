@@ -35,8 +35,7 @@ namespace OpenECC.Encryption
                 Z = public_key * k * _parameters.Cofactor;
             }
 
-            Key k1;
-            HmacKey k2;
+            Key k1, k2;
             DeriveKeys(Z.X, R, out k1, out k2);
 
             var ciphertext = SymmetricEncrypt(k1, m);
@@ -53,7 +52,7 @@ namespace OpenECC.Encryption
             return aes.Encrypt(m);
         }
 
-        private Mac GenerateMac(HmacKey k, ConvertableByteArray data)
+        private Mac GenerateMac(Key k, ConvertableByteArray data)
         {
             var hmac = new HmacGenerator(k);
             return hmac.Mac(data.ToString());
@@ -71,7 +70,7 @@ namespace OpenECC.Encryption
             throw new NotImplementedException();
         }
 
-        private void DeriveKeys(FiniteFieldElement z_x, Point R, out Key k1, out HmacKey k2)
+        private void DeriveKeys(FiniteFieldElement z_x, Point R, out Key k1, out Key k2)
         {
             var keybytes = GenerateKeyBytes(z_x, R).ToArray();
             throw new NotImplementedException();
@@ -105,8 +104,7 @@ namespace OpenECC.Encryption
                 //Should throw more fitting exception
             }
 
-            Key k1;
-            HmacKey k2;
+            Key k1, k2;
             DeriveKeys(Z.X, c.R, out k1, out k2);
 
             var new_mac = GenerateMac(k2, c.Ciphertext);

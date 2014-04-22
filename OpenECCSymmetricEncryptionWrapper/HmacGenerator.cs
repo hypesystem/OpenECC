@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption.SymmetricWrappers
 {
@@ -12,7 +13,7 @@ namespace OpenECC.Encryption.SymmetricWrappers
         HMAC algorithm;
         System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
 
-        public HmacGenerator(HmacKey k)
+        public HmacGenerator(Key k)
         {
             algorithm = new HMACSHA1(k.ToByteArray());
         }
