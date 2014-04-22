@@ -43,8 +43,6 @@
     <Compile Include="HmacGenerator.cs" />
     <Compile Include="ISymmetricEncryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RijndaelHmacKeyPair.cs" />
-    <Compile Include="RijndaelHmacKeyDeriver.cs" />
     <Compile Include="RijndaelSymmetricEncryptor.cs" />
   </ItemGroup>
   <ItemGroup>
