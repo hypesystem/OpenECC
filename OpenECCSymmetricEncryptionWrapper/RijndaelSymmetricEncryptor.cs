@@ -44,7 +44,22 @@ namespace OpenECC.Encryption.SymmetricWrappers
 
         public Plaintext Decrypt(Ciphertext c)
         {
-            throw new NotImplementedException();
+            ICryptoTransform decryptor = rijndael.CreateDecryptor(rijndael.Key, rijndael.IV);
+            string plaintext;
+
+            using (MemoryStream msDecrypt = new MemoryStream(c.ToByteArray()))
+            {
+                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                {
+                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                    {
+
+                        //Read all data from the stream
+                        plaintext = srDecrypt.ReadToEnd();
+                    }
+                }
+            }
+            return new Plaintext(plaintext);
         }
     }
 }
