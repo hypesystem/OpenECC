@@ -10,5 +10,6 @@ namespace OpenECC
     public interface ICurve
     {
         BigInteger Prime { get; }
+        Point Generator { get; }
     }
 }
