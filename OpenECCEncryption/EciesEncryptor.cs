@@ -61,16 +61,29 @@ namespace OpenECC.Encryption
 
         private BigInteger SelectK(BigInteger n)
         {
+            //Select k from R[1,n-1]
             throw new NotImplementedException();
         }
 
         private BigInteger SelectK(BigInteger n, Point p)
         {
+            //Select k from R[1,n-1]
             throw new NotImplementedException();
         }
 
-        private void DeriveKeys(FiniteFieldElement z_x, Point r, out Key k1, out HmacKey k2)
+        private void DeriveKeys(FiniteFieldElement z_x, Point R, out Key k1, out HmacKey k2)
         {
+            var keybytes = GenerateKeyBytes(z_x, R).ToArray();
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<byte> GenerateKeyBytes(FiniteFieldElement z_x, Point R)
+        {
+            int i = 0;
+            //How many key bytes?
+            //while limit not reached,
+            //    next_hash = hash(z_x,R,i++);
+            //    foreach(var byt in next_hash) yield byt;
             throw new NotImplementedException();
         }
 
