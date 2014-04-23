@@ -8,16 +8,14 @@ namespace OpenECC.Encryption
     public class ElGamalEncryptor : IEncryptor
     {
         ICurve _curve;
-        BigInteger _n;
         byte[] rng_bytes;
 
-        public ElGamalEncryptor(ICurve curve, BigInteger n)
+        public ElGamalEncryptor(ICurve curve)
         {
             _curve = curve;
-            _n = n;
 
             //Byte array with enough room for a number the size of n
-            rng_bytes = _n.ToByteArray();
+            rng_bytes = _curve.OrderOfGenerator.ToByteArray();
 
             //What is prime order (n)???
             throw new NotImplementedException();
@@ -49,7 +47,7 @@ namespace OpenECC.Encryption
             var rand = new BigInteger(rng_bytes);
 
             //Fit in range [1;n-1]
-            return (rand % (_n - 1)) + 1;
+            return (rand % (_curve.OrderOfGenerator - 1)) + 1;
         }
 
         public Plaintext Decrypt(PrivateKey d, Ciphertext c)

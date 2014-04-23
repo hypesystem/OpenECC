@@ -14,12 +14,7 @@ namespace OpenECCTest.Encryption
         [TestMethod]
         public void TestEncryptDecrypt()
         {
-            var enc = new ElGamalEncryptor(TestCurveFactory.SimpleCurve1, BigInteger.Parse("Fail"));
-
-            Plaintext m = new Plaintext("Hello, World. This is a test string.");
-
-
-            //enc.Encrypt(pub, m);
+            throw new NotImplementedException();
         }
     }
 }
