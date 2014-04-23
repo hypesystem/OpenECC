@@ -13,12 +13,6 @@ namespace OpenECC.Encryption
         public ElGamalEncryptor(ICurve curve)
         {
             _curve = curve;
-
-            //Byte array with enough room for a number the size of n
-            rng_bytes = _curve.OrderOfGenerator.ToByteArray();
-
-            //What is prime order (n)???
-            throw new NotImplementedException();
         }
 
         public Ciphertext Encrypt(PublicKey Q, Plaintext m)
