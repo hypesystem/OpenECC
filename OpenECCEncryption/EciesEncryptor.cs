@@ -128,5 +128,10 @@ namespace OpenECC.Encryption
         {
             throw new NotImplementedException();
         }
+
+        public KeyPair GenerateKeyPair()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
