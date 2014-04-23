@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenECC;
 using OpenECC.Encryption;
 using OpenECC.Encryption.Core;
 using System.Numerics;
@@ -12,9 +13,19 @@ namespace OpenECCTest.Encryption
     public class ElGamalEncryptorTest
     {
         [TestMethod]
-        public void TestEncryptDecrypt()
+        public void TestElGamalEncryptDecrypt()
         {
-            throw new NotImplementedException();
+            var curve = CurveFactory.secp256k1;
+            var encryptor = new ElGamalEncryptor(curve);
+            var keys = encryptor.GenerateKeyPair();
+
+            var m = new Plaintext("Hello, World");
+
+            var c = encryptor.Encrypt(keys.PublicKey, m);
+
+            var m2 = encryptor.Decrypt(keys.PrivateKey, c);
+
+            Assert.AreEqual(m, m2);
         }
     }
 }

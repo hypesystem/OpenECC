@@ -28,7 +28,7 @@ namespace OpenECCTest.Encryption
         }
 
         [TestMethod]
-        public void TestEncryptDecrypt()
+        public void TestRijndaelEncryptDecrypt()
         {
             RijndaelSymmetricEncryptor enc = new RijndaelSymmetricEncryptor(key, iv);
             var ciphertext = enc.Encrypt(plaintext);
