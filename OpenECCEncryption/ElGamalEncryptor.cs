@@ -8,7 +8,7 @@ namespace OpenECC.Encryption
     public class ElGamalEncryptor : IEncryptor
     {
         ICurve _curve;
-        byte[] rng_bytes;
+        SecureRandom _rng = new SecureRandom();
 
         public ElGamalEncryptor(ICurve curve)
         {
@@ -40,14 +40,10 @@ namespace OpenECC.Encryption
 
         public BigInteger SelectK()
         {
-            //Generate secure random byte sequence
-            var rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(rng_bytes);
-
-            var rand = new BigInteger(rng_bytes);
-
-            //Fit in range [1;n-1]
-            return (rand % (_curve.OrderOfGenerator - 1)) + 1;
+            return _rng.GetBigInteger(
+                min: BigInteger.One,
+                max: _curve.OrderOfGenerator - 1
+            );
         }
 
         public Plaintext Decrypt(PrivateKey d, Ciphertext c)
