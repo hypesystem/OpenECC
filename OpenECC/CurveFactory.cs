@@ -26,8 +26,16 @@ namespace OpenECC
 
                 var g_x = BigInteger.Parse("55066263022277343669578718895168534326250603453777594175500187360389116729240");
                 var g_y = BigInteger.Parse("32670510020758816978083085130507043184471273380659243275938904335757337482424");
+                var g_order = BigInteger.Parse("115792089237316195423570985008687907852837564279074904382605163141518161494337");
 
-                return new WeierstrassCurve(new BigInteger(0), new BigInteger(7), p, g_x, g_y);
+                return new WeierstrassCurve(
+                    a: new BigInteger(0), 
+                    b: new BigInteger(7), 
+                    prime: p, 
+                    generator_x: g_x,
+                    generator_y: g_y,
+                    order_of_generator: g_order
+                );
             }
         }
     }

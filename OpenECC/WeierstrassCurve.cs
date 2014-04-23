@@ -12,7 +12,7 @@ namespace OpenECC
     /// </summary>
     public class WeierstrassCurve : ICurve
     {
-        private BigInteger _a, _b, _prime;
+        private BigInteger _a, _b, _prime, _order;
         private readonly WeierstrassCurvePoint _infinity;
         private Point _g;
         public WeierstrassCurvePoint Infinity { get { return _infinity; } }
@@ -25,10 +25,11 @@ namespace OpenECC
             _infinity = new WeierstrassCurvePoint(null, null, this);
         }
 
-        public WeierstrassCurve(BigInteger a, BigInteger b, BigInteger prime, BigInteger generator_x, BigInteger generator_y)
+        public WeierstrassCurve(BigInteger a, BigInteger b, BigInteger prime, BigInteger generator_x, BigInteger generator_y, BigInteger order_of_generator)
             : this(a, b, prime)
         {
             _g = new WeierstrassCurvePoint(generator_x, generator_y, this);
+            _order = order_of_generator;
         }
 
         public BigInteger A
@@ -60,6 +61,14 @@ namespace OpenECC
             get
             {
                 return _g;
+            }
+        }
+
+        public BigInteger OrderOfGenerator
+        {
+            get
+            {
+                return _order;
             }
         }
 
