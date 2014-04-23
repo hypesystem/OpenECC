@@ -12,7 +12,7 @@ namespace OpenECCTest.Encryption.Core
         [TestInitialize]
         public void Setup()
         {
-            c = new Ciphertext(new byte[] { 4, 5, 6, 2, 1, 9 });
+            c = new Ciphertext(new byte[] { 72, 69, 73, 76 });
         }
 
         [TestMethod]

@@ -23,8 +23,7 @@ namespace OpenECC.Encryption.Core
 
         public override string ToString()
         {
-            throw new NotImplementedException();
-            //return BytesToString(_bytes);
+            return Encoding.ASCII.GetString(_bytes);
         }
 
         public byte[] ToByteArray()
@@ -37,7 +36,7 @@ namespace OpenECC.Encryption.Core
             if (obj is ConvertableByteArray)
             {
                 var cba = obj as ConvertableByteArray;
-                return ToByteArray().Equals(cba.ToByteArray());
+                return ToByteArray().SequenceEqual(cba.ToByteArray());
             }
             return false;
         }
