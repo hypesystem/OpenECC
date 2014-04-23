@@ -71,7 +71,9 @@ namespace OpenECC.Encryption
 
         public KeyPair GenerateKeyPair()
         {
-            throw new NotImplementedException();
+            var d = SelectK();
+            var Q = _curve.Generator * d;
+            return new KeyPair(new PublicKey(Q), new PrivateKey(d));
         }
     }
 }
