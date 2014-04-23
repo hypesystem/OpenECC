@@ -9,7 +9,7 @@ namespace OpenECCTest
     /// </summary>
     class TestCurveFactory
     {
-        public WeierstrassCurve SimpleCurve1
+        public static WeierstrassCurve SimpleCurve1
         {
             get
             {

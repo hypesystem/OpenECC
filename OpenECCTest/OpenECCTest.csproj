@@ -59,7 +59,9 @@
     <Compile Include="BouncyCastleComparison\SimpleCurveArithmeticTest.cs" />
     <Compile Include="Encryption\Core\CiphertextTest.cs" />
     <Compile Include="Encryption\Core\PlaintextTest.cs" />
+    <Compile Include="Encryption\ElGamalEncryptorTest.cs" />
     <Compile Include="Encryption\RijndaelTest.cs" />
+    <Compile Include="TestCurveFactory.cs" />
     <Compile Include="WeierstrassCurvePointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +69,10 @@
     <ProjectReference Include="..\OpenECCEncryptionCore\OpenECCEncryptionCore.csproj">
       <Project>{b8c68960-ff90-46aa-a34f-67fee5a54190}</Project>
       <Name>OpenECCEncryptionCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenECCEncryption\OpenECCEncryption.csproj">
+      <Project>{992d8291-e489-402e-98c0-210112ae2deb}</Project>
+      <Name>OpenECCEncryption</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj">
       <Project>{67a8e411-ab59-41c1-969a-007f7c841495}</Project>
