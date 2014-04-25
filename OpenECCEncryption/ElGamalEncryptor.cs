@@ -9,10 +9,24 @@ namespace OpenECC.Encryption
     {
         ICurve _curve;
         SecureRandom _rng = new SecureRandom();
+        IMessageEncoder _encoder;
 
         public ElGamalEncryptor(ICurve curve)
         {
             _curve = curve;
+
+            //The encoder only works with WeierstrassCurves
+            if (curve is WeierstrassCurve)
+            {
+                var c = curve as WeierstrassCurve;
+                _encoder = new ProbablisticWeierstrassMessageEncoder(c, new BigInteger(2));
+                throw new NotImplementedException();
+                //Message encoder's K should be figured out!
+            }
+            else
+            {
+                throw new ArgumentException("Curve must be a WeierstrassCurve in order for the encoding to work.", "curve");
+            }
         }
 
         public Ciphertext Encrypt(PublicKey Q, Plaintext m)
@@ -29,7 +43,7 @@ namespace OpenECC.Encryption
 
         public Point RepresentPlaintextAsPoint(Plaintext m)
         {
-            throw new NotImplementedException();
+            return _encoder.EncodeMessage(m);
         }
 
         public BigInteger SelectK()
@@ -54,7 +68,7 @@ namespace OpenECC.Encryption
 
         private Plaintext RepresentPointAsPlaintext(Point p)
         {
-            throw new NotImplementedException();
+            return _encoder.DecodeMessage(p);
         }
 
         public KeyPair GenerateKeyPair()
