@@ -22,7 +22,7 @@ namespace OpenECC.Encryption.Core
             _rng.GetBytes(bytes);
             var rand = new BigInteger(bytes);
 
-            return (rand % (max)) + min;
+            return (rand % (max - min)) + min;
         }
 
         public BigInteger GetBigInteger(BigInteger max)
