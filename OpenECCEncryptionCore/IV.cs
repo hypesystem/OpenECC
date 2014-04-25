@@ -11,11 +11,6 @@ namespace OpenECC.Encryption.Core
     {
         public IV(BigInteger i) : base(i.ToByteArray()) { }
 
-        public BigInteger ToBigInteger()
-        {
-            return new BigInteger(ToByteArray());
-        }
-
         public override string ToString()
         {
             return ToBigInteger().ToString();

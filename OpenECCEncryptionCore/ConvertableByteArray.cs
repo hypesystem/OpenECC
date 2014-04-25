@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace OpenECC.Encryption.Core
 {
@@ -29,6 +30,11 @@ namespace OpenECC.Encryption.Core
         public byte[] ToByteArray()
         {
             return _bytes;
+        }
+
+        public BigInteger ToBigInteger()
+        {
+            return new BigInteger(ToByteArray());
         }
 
         public override bool Equals(object obj)
