@@ -89,6 +89,28 @@ namespace OpenECC
             return new FiniteFieldElement(result as FpFieldElement);
         }
 
+        public FiniteFieldElement Sqrt()
+        {
+            var result = _field.Sqrt();
+            if (result == null)
+                throw new ArgumentException("Unsuccesful square root!", "_field");
+
+            return new FiniteFieldElement(result as FpFieldElement);
+        }
+
+        public bool TrySqrt(out FiniteFieldElement result)
+        {
+            var potential_result = _field.Sqrt();
+            result = new FiniteFieldElement(potential_result as FpFieldElement);
+
+            if (potential_result == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
         #region operators
