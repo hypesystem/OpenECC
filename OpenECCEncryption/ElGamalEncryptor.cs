@@ -19,9 +19,7 @@ namespace OpenECC.Encryption
             if (curve is WeierstrassCurve)
             {
                 var c = curve as WeierstrassCurve;
-                _encoder = new ProbablisticWeierstrassMessageEncoder(c, new BigInteger(2));
-                throw new NotImplementedException();
-                //Message encoder's K should be figured out!
+                _encoder = new ProbablisticWeierstrassMessageEncoder(c);
             }
             else
             {
@@ -31,19 +29,15 @@ namespace OpenECC.Encryption
 
         public Ciphertext Encrypt(PublicKey Q, Plaintext m)
         {
-            var M = RepresentPlaintextAsPoint(m);
+            BigInteger encoding_k;
+            var M = _encoder.EncodeMessage(m, out encoding_k);
 
             var k = SelectK();
 
             var c1 = _curve.Generator * k;
             var c2 = M + (Q.Point * k);
 
-            return new ElGamalCiphertext(c1, c2);
-        }
-
-        public Point RepresentPlaintextAsPoint(Plaintext m)
-        {
-            return _encoder.EncodeMessage(m);
+            return new ElGamalCiphertext(c1, c2, encoding_k);
         }
 
         public BigInteger SelectK()
@@ -63,12 +57,7 @@ namespace OpenECC.Encryption
 
             var M = ciphertext.C2 - (ciphertext.C1 * d.Value);
 
-            return RepresentPointAsPlaintext(M);
-        }
-
-        private Plaintext RepresentPointAsPlaintext(Point p)
-        {
-            return _encoder.DecodeMessage(p);
+            return _encoder.DecodeMessage(M, ciphertext.EncodingKey);
         }
 
         public KeyPair GenerateKeyPair()

@@ -7,21 +7,19 @@ namespace OpenECC.Encryption
     public class ProbablisticWeierstrassMessageEncoder : IMessageEncoder
     {
         private WeierstrassCurve _curve;
-        private BigInteger _k;
 
-        public ProbablisticWeierstrassMessageEncoder(WeierstrassCurve curve, BigInteger k)
+        public ProbablisticWeierstrassMessageEncoder(WeierstrassCurve curve)
         {
             _curve = curve;
-            _k = k;
         }
 
-        public Point EncodeMessage(Plaintext message)
+        public Point EncodeMessage(Plaintext message, out BigInteger k)
         {
             //Map message to Z_p
             var m = message.ToBigInteger();
 
-            //Select K such that (m+1)K < p
-            var k = (m + 1) / _curve.Prime;
+            //Select K such that (m+1)K < p; here: biggest k possible
+            k = (m + 1) / _curve.Prime;
 
             return IntegerEncoding(m, k);
         }
@@ -55,9 +53,12 @@ namespace OpenECC.Encryption
             throw new ArgumentException("Could not encode m as point on curve. Probablistic mapping failed.", "m_value");
         }
 
-        public Plaintext DecodeMessage(Point messagePoint)
+        public Plaintext DecodeMessage(Point messagePoint, BigInteger k)
         {
-            throw new NotImplementedException();
+            //m = floor(x/k)
+            var m = messagePoint.X.Value / k;
+
+            return new Plaintext(m.ToByteArray());
         }
     }
 }
