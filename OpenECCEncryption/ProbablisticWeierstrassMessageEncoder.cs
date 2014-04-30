@@ -15,13 +15,20 @@ namespace OpenECC.Encryption
 
         public Point EncodeMessage(Plaintext message, out BigInteger k)
         {
-            //Map message to Z_p
             var m = message.ToBigInteger();
 
-            //Select K such that (m+1)K < p; here: biggest k possible
-            k = (m + 1) / _curve.Prime;
+            //Ensure that message is not too long.
+            if (m + 1 >= _curve.Prime)
+                throw new ArgumentException("Message too large to be encrypted. Must be smaller than p (" + _curve.Prime + ").", "message");
 
+            k = GenerateEncodingKey(m);
             return IntegerEncoding(m, k);
+        }
+
+        //Select K such that (m+1)K < p; here: biggest k possible
+        BigInteger GenerateEncodingKey(BigInteger m)
+        {
+            return (m + 1) / _curve.Prime;
         }
 
         Point IntegerEncoding(BigInteger m_value, BigInteger k_value) {
