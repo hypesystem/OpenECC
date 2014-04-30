@@ -37,7 +37,7 @@ namespace OpenECC.Encryption
 
             FiniteFieldElement x;
             FiniteFieldElement y;
-            for (int j_value = 0; j_value < k.Value; j_value++)
+            for (BigInteger j_value = BigInteger.Zero; j_value < k.Value; j_value++)
             {
                 var j = new FiniteFieldElement(j_value, _curve.Prime);
                 x = (m_times_k + j);
