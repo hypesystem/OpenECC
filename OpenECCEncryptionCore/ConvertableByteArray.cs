@@ -12,14 +12,22 @@ namespace OpenECC.Encryption.Core
         private byte[] _bytes;
         private static System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
 
-        public ConvertableByteArray(byte[] bytes)
+        public ConvertableByteArray(string str) : this(encoding.GetBytes(str)) { }
+
+        public ConvertableByteArray(params byte[][] bytes)
         {
-            _bytes = bytes;
+            //TODO: This is not the best way to convert to byte array...
+            _bytes = ConcatByteArrays(bytes);
         }
 
-        public ConvertableByteArray(string str)
+        byte[] ConcatByteArrays(IEnumerable<byte[]> arrs)
         {
-            _bytes = encoding.GetBytes(str);
+            IEnumerable<byte> result = new byte[0];
+            foreach (var arr in arrs)
+            {
+                result = result.Concat(arr);
+            }
+            return result.ToArray();
         }
 
         public override string ToString()

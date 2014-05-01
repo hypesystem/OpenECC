@@ -8,7 +8,7 @@ namespace OpenECC.Encryption.Core
 {
     public class Ciphertext : ConvertableByteArray
     {
-        public Ciphertext(byte[] bytes) : base(bytes) { }
+        public Ciphertext(params byte[][] bytes) : base(bytes) { }
         public Ciphertext(string str) : base(str) { }
     }
 }

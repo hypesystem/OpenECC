@@ -9,14 +9,11 @@ namespace OpenECC.Encryption
         private Point _c1, _c2;
         private BigInteger _encoding_key;
 
-        public ElGamalCiphertext(Point c1, Point c2, BigInteger encoding_key) : base ("/")
+        public ElGamalCiphertext(Point c1, Point c2, BigInteger encoding_key) : base (c1.ToByteArray(), c2.ToByteArray(), encoding_key.ToByteArray())
         {
             _c1 = c1;
             _c2 = c2;
             _encoding_key = encoding_key;
-
-            throw new NotImplementedException();
-            //Should use base properly!
         }
 
         public Point C1

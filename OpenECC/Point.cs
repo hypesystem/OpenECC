@@ -37,5 +37,12 @@ namespace OpenECC
             return p + (-q);
         }
         #endregion
+
+        #region conversion
+        public byte[] ToByteArray()
+        {
+            return X.Value.ToByteArray().Concat(Y.Value.ToByteArray()).ToArray();
+        }
+        #endregion
     }
 }
