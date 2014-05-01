@@ -18,7 +18,6 @@ namespace OpenECCTest.Encryption
             var curve = CurveFactory.secp256k1;
             var encryptor = new ElGamalEncryptor(curve);
             var keys = encryptor.GenerateKeyPair();
-            throw new ArgumentException("keypar gen done");
 
             var m = new Plaintext("Hello, World");
 
