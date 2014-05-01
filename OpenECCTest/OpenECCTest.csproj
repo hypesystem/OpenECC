@@ -60,6 +60,7 @@
     <Compile Include="Encryption\Core\CiphertextTest.cs" />
     <Compile Include="Encryption\Core\PlaintextTest.cs" />
     <Compile Include="Encryption\ElGamalEncryptorTest.cs" />
+    <Compile Include="Encryption\ProbabilisticWeierstrassMessageEncoderTest.cs" />
     <Compile Include="Encryption\RijndaelTest.cs" />
     <Compile Include="MultiplicationPerformanceTest.cs" />
     <Compile Include="TestCurveFactory.cs" />

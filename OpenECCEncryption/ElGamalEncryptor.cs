@@ -19,7 +19,7 @@ namespace OpenECC.Encryption
             if (curve is WeierstrassCurve)
             {
                 var c = curve as WeierstrassCurve;
-                _encoder = new ProbablisticWeierstrassMessageEncoder(c);
+                _encoder = new ProbabilisticWeierstrassMessageEncoder(c);
             }
             else
             {

@@ -4,11 +4,11 @@ using OpenECC.Encryption.Core;
 
 namespace OpenECC.Encryption
 {
-    public class ProbablisticWeierstrassMessageEncoder : IMessageEncoder
+    public class ProbabilisticWeierstrassMessageEncoder : IMessageEncoder
     {
         private WeierstrassCurve _curve;
 
-        public ProbablisticWeierstrassMessageEncoder(WeierstrassCurve curve)
+        public ProbabilisticWeierstrassMessageEncoder(WeierstrassCurve curve)
         {
             _curve = curve;
         }
@@ -28,7 +28,7 @@ namespace OpenECC.Encryption
         //Select K such that (m+1)K < p; here: biggest k possible
         BigInteger GenerateEncodingKey(BigInteger m)
         {
-            return (m + 1) / _curve.Prime;
+            return _curve.Prime / (m + 1);
         }
 
         Point IntegerEncoding(BigInteger m_value, BigInteger k_value) {
@@ -42,14 +42,14 @@ namespace OpenECC.Encryption
 
             FiniteFieldElement x;
             FiniteFieldElement y;
-            for (BigInteger j_value = BigInteger.Zero; j_value < k.Value; j_value++)
+            for (BigInteger j_value = BigInteger.Zero; j_value < k_value; j_value++)
             {
                 var j = new FiniteFieldElement(j_value, _curve.Prime);
                 x = (m_times_k + j);
 
                 //z = x^3+ax+b
                 var z = (x^3) + (a*x) + b;
-                
+
                 //sqrt mod p
                 if (z.TrySqrt(out y))
                 {

@@ -49,7 +49,7 @@
     <Compile Include="IMessageEncoder.cs" />
     <Compile Include="KeyPair.cs" />
     <Compile Include="PrivateKey.cs" />
-    <Compile Include="ProbablisticWeierstrassMessageEncoder.cs" />
+    <Compile Include="ProbabilisticWeierstrassMessageEncoder.cs" />
     <Compile Include="PublicKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
