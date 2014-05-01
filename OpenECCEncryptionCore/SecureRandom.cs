@@ -21,6 +21,7 @@ namespace OpenECC.Encryption.Core
             byte[] bytes = max.ToByteArray();
             _rng.GetBytes(bytes);
             var rand = new BigInteger(bytes);
+            if (rand < 0) rand = -rand;
 
             return (rand % (max - min)) + min;
         }
