@@ -12,6 +12,21 @@ namespace OpenECC
     /// </summary>
     public class WeierstrassCurvePoint : Point
     {
+        private static IPointMultiplier _multiplier = new DoubleAndAddPointMultiplier();
+
+        public static IPointMultiplier Multiplier
+        {
+            get
+            {
+                return _multiplier;
+            }
+            set
+            {
+                _multiplier = value;
+            }
+        }
+
+
         private readonly FiniteFieldElement _x, _y;
         private readonly WeierstrassCurve _curve;
 
@@ -30,6 +45,7 @@ namespace OpenECC
 
         public override FiniteFieldElement X { get { return _x; } }
         public override FiniteFieldElement Y { get { return _y; } }
+        public override ICurve Curve { get { return _curve; } }
 
         public override Point Add(Point other)
         {
@@ -44,6 +60,9 @@ namespace OpenECC
             //p + infinity = p
             if (q.Equals(_curve.Infinity))
                 return this;
+
+            if (this.Equals(_curve.Infinity))
+                return q;
 
             //p + -p = infinity
             if (this.Equals(-q))
@@ -71,12 +90,7 @@ namespace OpenECC
 
         public override Point Multiply(BigInteger x)
         {
-            Point result = this;
-            for (int i = 1; i < x; i++)
-            {
-                result = result + this;
-            }
-            return result;
+            return _multiplier.Multiply(this, x);
         }
 
         public override Point Negate()
@@ -87,6 +101,15 @@ namespace OpenECC
 
             return new WeierstrassCurvePoint(X, -Y, _curve);
         }
+
+        #region ToString
+
+        public override string ToString()
+        {
+            return "WeierstrassCurvePoint(" + X.Value + "," + Y.Value + ")";
+        }
+
+        #endregion
 
         #region comparison
 

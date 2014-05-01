@@ -37,6 +37,8 @@ namespace OpenECCTest.BouncyCastleComparison
 
         private void AssertPointsAreEqual(Org.BouncyCastle.Math.EC.ECPoint bcp, OpenECC.Point oeccp)
         {
+            Assert.IsNotNull(bcp);
+            Assert.IsNotNull(oeccp);
             Assert.AreEqual(bcp.X.ToBigInteger().ToString(), oeccp.X.Value.ToString());
             Assert.AreEqual(bcp.Y.ToBigInteger().ToString(), oeccp.Y.Value.ToString());
         }
@@ -50,6 +52,14 @@ namespace OpenECCTest.BouncyCastleComparison
         {
             AssertPointsAreEqual(BCPoint1, OpenECCPoint1);
             AssertPointsAreEqual(BCPoint2, OpenECCPoint2);
+        }
+
+        [TestMethod]
+        public void TestSecp256k1Multiplication2()
+        {
+            var bc_point = BCGenerator.Multiply(new Org.BouncyCastle.Math.BigInteger("15"));
+            var oecc_point = OpenECCGenerator * 15;
+            AssertPointsAreEqual(bc_point, oecc_point);
         }
 
         [TestMethod]

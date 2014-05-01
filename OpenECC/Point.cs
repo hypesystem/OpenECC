@@ -11,6 +11,7 @@ namespace OpenECC
     {
         public abstract FiniteFieldElement X { get; }
         public abstract FiniteFieldElement Y { get; }
+        public abstract ICurve Curve { get; }
 
         public abstract Point Add(Point q);
         public abstract Point Multiply(BigInteger q);

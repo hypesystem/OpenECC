@@ -11,6 +11,7 @@ namespace OpenECC
     {
         BigInteger Prime { get; }
         Point Generator { get; }
+        Point Infinity { get; }
         BigInteger OrderOfGenerator { get; }
     }
 }

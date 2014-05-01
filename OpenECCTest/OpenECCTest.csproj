@@ -63,6 +63,7 @@
     <Compile Include="Encryption\ProbabilisticWeierstrassMessageEncoderTest.cs" />
     <Compile Include="Encryption\RijndaelTest.cs" />
     <Compile Include="MultiplicationPerformanceTest.cs" />
+    <Compile Include="MultiplierTest.cs" />
     <Compile Include="TestCurveFactory.cs" />
     <Compile Include="WeierstrassCurvePointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

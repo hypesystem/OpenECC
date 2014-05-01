@@ -15,7 +15,7 @@ namespace OpenECC
         private BigInteger _a, _b, _prime, _order;
         private readonly WeierstrassCurvePoint _infinity;
         private Point _g;
-        public WeierstrassCurvePoint Infinity { get { return _infinity; } }
+        public Point Infinity { get { return _infinity; } }
 
         public WeierstrassCurve(BigInteger a, BigInteger b, BigInteger prime)
         {
