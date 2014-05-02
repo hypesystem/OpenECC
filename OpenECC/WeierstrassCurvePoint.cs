@@ -12,17 +12,27 @@ namespace OpenECC
     /// </summary>
     public class WeierstrassCurvePoint : Point
     {
-        private static IPointMultiplier _multiplier = new DoubleAndAddPointMultiplier();
+        private static IPointMultiplier _multiplier = null;
+        private static IPointMultiplier _default_multiplier = new FpNafMultiplier();
 
         public static IPointMultiplier Multiplier
         {
             get
             {
+                if (_multiplier == null) _multiplier = DefaultMultiplier;
                 return _multiplier;
             }
             set
             {
                 _multiplier = value;
+            }
+        }
+
+        public static IPointMultiplier DefaultMultiplier
+        {
+            get
+            {
+                return _default_multiplier;
             }
         }
 
@@ -90,7 +100,7 @@ namespace OpenECC
 
         public override Point Multiply(BigInteger x)
         {
-            return _multiplier.Multiply(this, x);
+            return Multiplier.Multiply(this, x);
         }
 
         public override Point Negate()
