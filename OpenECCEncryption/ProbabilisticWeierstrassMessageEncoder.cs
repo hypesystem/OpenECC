@@ -28,7 +28,10 @@ namespace OpenECC.Encryption
         //Select K such that (m+1)K < p; here: biggest k possible
         BigInteger GenerateEncodingKey(BigInteger m)
         {
-            return _curve.Prime / (m + 1);
+            return new BigInteger(7);
+
+            //Highest possible K -- results in bad performance:
+            //return _curve.Prime / (m + 1);
         }
 
         Point IntegerEncoding(BigInteger m_value, BigInteger k_value) {

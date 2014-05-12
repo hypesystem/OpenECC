@@ -12,31 +12,6 @@ namespace OpenECC
     /// </summary>
     public class WeierstrassCurvePoint : Point
     {
-        private static IPointMultiplier _multiplier = null;
-        private static IPointMultiplier _default_multiplier = new FpNafMultiplier();
-
-        public static IPointMultiplier Multiplier
-        {
-            get
-            {
-                if (_multiplier == null) _multiplier = DefaultMultiplier;
-                return _multiplier;
-            }
-            set
-            {
-                _multiplier = value;
-            }
-        }
-
-        public static IPointMultiplier DefaultMultiplier
-        {
-            get
-            {
-                return _default_multiplier;
-            }
-        }
-
-
         private readonly FiniteFieldElement _x, _y;
         private readonly WeierstrassCurve _curve;
 
@@ -96,11 +71,6 @@ namespace OpenECC
                 y3 = (lambda) * (this.X - x3) - this.Y;
             }
             return new WeierstrassCurvePoint(x3, y3, _curve);
-        }
-
-        public override Point Multiply(BigInteger x)
-        {
-            return Multiplier.Multiply(this, x);
         }
 
         public override Point Negate()

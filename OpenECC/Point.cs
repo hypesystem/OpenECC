@@ -9,13 +9,41 @@ namespace OpenECC
 {
     public abstract class Point
     {
+        private static IPointMultiplier _multiplier = null;
+        private static IPointMultiplier _default_multiplier = new FpNafMultiplier();
+
+        public static IPointMultiplier Multiplier
+        {
+            get
+            {
+                if (_multiplier == null) _multiplier = DefaultMultiplier;
+                return _multiplier;
+            }
+            set
+            {
+                _multiplier = value;
+            }
+        }
+
+        public static IPointMultiplier DefaultMultiplier
+        {
+            get
+            {
+                return _default_multiplier;
+            }
+        }
+
         public abstract FiniteFieldElement X { get; }
         public abstract FiniteFieldElement Y { get; }
         public abstract ICurve Curve { get; }
 
         public abstract Point Add(Point q);
-        public abstract Point Multiply(BigInteger q);
         public abstract Point Negate();
+
+        public Point Multiply(BigInteger q)
+        {
+            return Multiplier.Multiply(this, q);
+        }
 
         #region operators
         public static Point operator +(Point p, Point q)
