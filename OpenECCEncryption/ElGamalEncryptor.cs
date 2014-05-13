@@ -11,33 +11,22 @@ namespace OpenECC.Encryption
         SecureRandom _rng = new SecureRandom();
         IMessageEncoder _encoder;
 
-        public ElGamalEncryptor(ICurve curve)
+        public ElGamalEncryptor(ICurve curve, IMessageEncoder encoder)
         {
             _curve = curve;
-
-            //The encoder only works with WeierstrassCurves
-            if (curve is WeierstrassCurve)
-            {
-                var c = curve as WeierstrassCurve;
-                _encoder = new ProbabilisticWeierstrassMessageEncoder(c);
-            }
-            else
-            {
-                throw new ArgumentException("Curve must be a WeierstrassCurve in order for the encoding to work.", "curve");
-            }
+            _encoder = encoder;
         }
 
         public Ciphertext Encrypt(PublicKey Q, Plaintext m)
         {
-            BigInteger encoding_k;
-            var M = _encoder.EncodeMessage(m, out encoding_k);
+            var M = _encoder.EncodeMessage(m);
 
             var k = SelectK();
 
             var c1 = _curve.Generator * k;
             var c2 = M + (Q.Point * k);
 
-            return new ElGamalCiphertext(c1, c2, encoding_k);
+            return new ElGamalCiphertext(c1, c2);
         }
 
         public BigInteger SelectK()
@@ -57,7 +46,7 @@ namespace OpenECC.Encryption
 
             var M = ciphertext.C2 - (ciphertext.C1 * d.Value);
 
-            return _encoder.DecodeMessage(M, ciphertext.EncodingKey);
+            return _encoder.DecodeMessage(M);
         }
 
         public KeyPair GenerateKeyPair()

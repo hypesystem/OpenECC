@@ -4,6 +4,7 @@ using OpenECC;
 using OpenECC.Encryption;
 using OpenECC.Encryption.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Numerics;
 
 namespace OpenECCTest.Performance
 {
@@ -31,7 +32,8 @@ namespace OpenECCTest.Performance
 
             var curve = CurveFactory.secp256k1;
             WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplier();
-            var encryptor = new ElGamalEncryptor(curve);
+            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+            var encryptor = new ElGamalEncryptor(curve, encoder);
 
             stopwatch.Stop();
             var t_setup = stopwatch.Elapsed;
@@ -71,7 +73,8 @@ namespace OpenECCTest.Performance
 
             var curve = CurveFactory.secp256k1;
             WeierstrassCurvePoint.Multiplier = new FpNafMultiplier();
-            var encryptor = new ElGamalEncryptor(curve);
+            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+            var encryptor = new ElGamalEncryptor(curve, encoder);
 
             stopwatch.Stop();
             var t_setup = stopwatch.Elapsed;

@@ -14,15 +14,15 @@ namespace OpenECCTest.Encryption
         public void TestEncoderCyclic()
         {
             var curve = CurveFactory.nistp384;
-            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve);
+            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
 
             //Encode
             var m = new Plaintext("A");
             BigInteger encoding_key;
-            var M = encoder.EncodeMessage(m, out encoding_key);
+            var M = encoder.EncodeMessage(m);
 
             //Decode
-            var m2 = encoder.DecodeMessage(M, encoding_key);
+            var m2 = encoder.DecodeMessage(M);
 
             Assert.AreEqual(m, m2);
         }

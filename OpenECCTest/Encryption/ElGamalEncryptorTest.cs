@@ -16,7 +16,8 @@ namespace OpenECCTest.Encryption
         public void TestElGamalEncryptDecrypt()
         {
             var curve = CurveFactory.secp256k1;
-            var encryptor = new ElGamalEncryptor(curve);
+            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+            var encryptor = new ElGamalEncryptor(curve, encoder);
             var keys = encryptor.GenerateKeyPair();
 
             var m = new Plaintext("Hello, World");

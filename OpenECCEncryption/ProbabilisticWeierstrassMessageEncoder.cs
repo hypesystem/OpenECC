@@ -7,13 +7,15 @@ namespace OpenECC.Encryption
     public class ProbabilisticWeierstrassMessageEncoder : IMessageEncoder
     {
         private WeierstrassCurve _curve;
+        private BigInteger _k;
 
-        public ProbabilisticWeierstrassMessageEncoder(WeierstrassCurve curve)
+        public ProbabilisticWeierstrassMessageEncoder(WeierstrassCurve curve, BigInteger encoding_key)
         {
             _curve = curve;
+            _k = encoding_key;
         }
 
-        public Point EncodeMessage(Plaintext message, out BigInteger k)
+        public Point EncodeMessage(Plaintext message)
         {
             var m = message.ToBigInteger();
 
@@ -21,17 +23,7 @@ namespace OpenECC.Encryption
             if (m + 1 >= _curve.Prime)
                 throw new ArgumentException("Message too large to be encrypted. Must be smaller than p (" + _curve.Prime + ").", "message");
 
-            k = GenerateEncodingKey(m);
-            return IntegerEncoding(m, k);
-        }
-
-        //Select K such that (m+1)K < p; here: biggest k possible
-        BigInteger GenerateEncodingKey(BigInteger m)
-        {
-            return new BigInteger(7);
-
-            //Highest possible K -- results in bad performance:
-            //return _curve.Prime / (m + 1);
+            return IntegerEncoding(m, _k);
         }
 
         Point IntegerEncoding(BigInteger m_value, BigInteger k_value) {
@@ -63,10 +55,10 @@ namespace OpenECC.Encryption
             throw new ArgumentException("Could not encode m as point on curve. Probablistic mapping failed.", "m_value");
         }
 
-        public Plaintext DecodeMessage(Point messagePoint, BigInteger k)
+        public Plaintext DecodeMessage(Point messagePoint)
         {
             //m = floor(x/k)
-            var m = messagePoint.X.Value / k;
+            var m = messagePoint.X.Value / _k;
 
             return new Plaintext(m.ToByteArray());
         }
