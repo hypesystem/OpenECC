@@ -67,9 +67,10 @@ namespace OpenECC
             return new FiniteFieldElement(resultingElement);
         }
 
-        public FiniteFieldElement Multiply(int x)
+        public FiniteFieldElement Multiply(BigInteger x)
         {
-            var xAsFiniteFieldElement = new FiniteFieldElement(new BigInteger(x), Prime);
+            var xInnerField = new FpFieldElement(this._field.Q, x.ToBouncyCastleBigInteger());
+            var xAsFiniteFieldElement = new FiniteFieldElement(xInnerField);
             return Multiply(xAsFiniteFieldElement);
         }
 
@@ -160,7 +161,7 @@ namespace OpenECC
             {
                 var y = obj as FiniteFieldElement;
 
-                if (this.Prime == y.Prime && this.Value == y.Value) return true;
+                return this._field.Equals(y._field);
             }
             return false;
         }
