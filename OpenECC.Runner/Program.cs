@@ -14,6 +14,7 @@ namespace OpenECC.Runner
     {
         static void Main(string[] args)
         {
+            Console.ReadKey();
             var str = args[0];
 
             var curve = CurveFactory.secp256k1;
