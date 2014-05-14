@@ -56,6 +56,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BouncyCastleComparison\Secp256k1ArithmeticTest.cs" />
+    <Compile Include="Performance\Secp256k1EncryptionPerformanceTest.cs" />
     <Compile Include="BouncyCastleComparison\SimpleCurveArithmeticTest.cs" />
     <Compile Include="Encryption\Core\CiphertextTest.cs" />
     <Compile Include="Encryption\Core\PlaintextTest.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="MultiplicationPerformanceTest.cs" />
     <Compile Include="MultiplierTest.cs" />
     <Compile Include="Performance\FullStackPerformanceTests.cs" />
+    <Compile Include="RuntimeAssert.cs" />
     <Compile Include="TestCurveFactory.cs" />
     <Compile Include="WeierstrassCurvePointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

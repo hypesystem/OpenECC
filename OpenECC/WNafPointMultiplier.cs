@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace OpenECC
 {
+    /**
     public class WNafPointMultiplier : IPointMultiplier
     {
         private int _w = 4;
@@ -66,4 +67,5 @@ namespace OpenECC
             return multiplicands.Select(x => _naive_multiplier.Multiply(p, x)).ToArray();
         }
     }
+     */
 }

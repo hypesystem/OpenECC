@@ -48,7 +48,6 @@
     <Compile Include="FpNafMultiplier.cs" />
     <Compile Include="InvalidCurveException.cs" />
     <Compile Include="IPointMultiplier.cs" />
-    <Compile Include="NaivePointMultiplier.cs" />
     <Compile Include="WeierstrassCurvePoint.cs" />
     <Compile Include="CurveFactory.cs" />
     <Compile Include="FiniteFieldElement.cs" />

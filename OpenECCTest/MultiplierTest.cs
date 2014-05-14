@@ -33,6 +33,7 @@ namespace OpenECCTest
 
         #region naive
 
+        /*
         [TestMethod]
         public void NaiveMultiplierOneTest()
         {
@@ -59,7 +60,7 @@ namespace OpenECCTest
         {
             WeierstrassCurvePoint.Multiplier = new NaivePointMultiplier();
             Assert.AreEqual(p10, p * 10);
-        }
+        }*/
 
         #endregion
 
@@ -143,6 +144,7 @@ namespace OpenECCTest
 
         #region wnaf
 
+        /*
         [TestMethod]
         public void WNafPointMultiplierOneTest()
         {
@@ -176,7 +178,7 @@ namespace OpenECCTest
         {
             WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
             Assert.AreEqual(p100, p * 100);
-        }
+        }*/
 
         #endregion
     }

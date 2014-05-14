@@ -20,14 +20,6 @@ namespace OpenECCTest
             return stopwatch.Elapsed;
         }
 
-        public static void AssertLessThanExpected(TimeSpan expected, TimeSpan actual)
-        {
-            if (actual >= expected)
-            {
-                throw new AssertFailedException("Assert Failed: Actual timespan was greater than or equal to expected. Actual <"+actual+">, Expected <"+expected+">");
-            }
-        }
-
         [TestMethod]
         public void TestSmallMultiplication()
         {
@@ -39,7 +31,7 @@ namespace OpenECCTest
                 var point2 = point * new BigInteger(100);
             });
 
-            AssertLessThanExpected(
+            RuntimeAssert.LessThan(
                 expected: new TimeSpan(0,0,1),
                 actual: time
             );
