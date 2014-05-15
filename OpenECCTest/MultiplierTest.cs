@@ -187,5 +187,45 @@ namespace OpenECCTest
 
         #endregion
 
+        #region wnaf
+
+        [TestMethod]
+        public void WNafMultiplierOneTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new WNafMultiplier(5);
+            Assert.AreEqual(p, p * 1);
+        }
+
+        [TestMethod]
+        public void WNafMultiplierTwoTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new WNafMultiplier(5);
+            Assert.AreEqual(p2, p * 2);
+        }
+
+        [TestMethod]
+        public void WNafMultiplierFourTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new WNafMultiplier(5);
+            Assert.AreEqual(p4, p * 4);
+        }
+
+        [TestMethod]
+        public void WNafMultiplierTenTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new WNafMultiplier(5);
+            Assert.AreEqual(p10, p * 10);
+        }
+
+        [TestMethod]
+        public void WNafMultiplierHundredTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new WNafMultiplier(5);
+            Assert.AreEqual(p100, p * 100);
+        }
+
+        #endregion
+
+
     }
 }

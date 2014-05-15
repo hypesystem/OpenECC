@@ -29,7 +29,7 @@ namespace OpenECC
             return result;
         }
 
-        public IEnumerable<BigInteger> ComputeNaf(BigInteger k)
+        IEnumerable<BigInteger> ComputeNaf(BigInteger k)
         {
             while (k >= 1)
             {
