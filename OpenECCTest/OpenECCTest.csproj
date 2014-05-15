@@ -56,6 +56,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BouncyCastleComparison\Secp256k1ArithmeticTest.cs" />
+    <Compile Include="Performance\ComputeNafTest.cs" />
     <Compile Include="Performance\Secp256k1EncryptionPerformanceTest.cs" />
     <Compile Include="BouncyCastleComparison\SimpleCurveArithmeticTest.cs" />
     <Compile Include="Encryption\Core\CiphertextTest.cs" />

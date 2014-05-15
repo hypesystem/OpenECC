@@ -48,6 +48,7 @@
     <Compile Include="DoubleAndAddPointMultiplier.cs" />
     <Compile Include="FpNafMultiplier.cs" />
     <Compile Include="IPointMultiplier.cs" />
+    <Compile Include="NafMultiplier.cs" />
     <Compile Include="WeierstrassCurvePoint.cs" />
     <Compile Include="CurveFactory.cs" />
     <Compile Include="FiniteFieldElement.cs" />
