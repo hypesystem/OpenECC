@@ -14,7 +14,7 @@ namespace OpenECC
         private readonly int _limit;
         private readonly IPointMultiplier _precomputer;
 
-        public WNafMultiplier(int w) : this(w, new DoubleAndAddPointMultiplierAlternate()) { }
+        public WNafMultiplier(int w) : this(w, new BinaryDoubleAndAddPointMultiplier()) { }
 
         public WNafMultiplier(int w, IPointMultiplier precomputer)
         {

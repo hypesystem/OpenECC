@@ -80,7 +80,7 @@ namespace OpenECCTest.Performance
         }
 
         [TestMethod]
-        public void TestSecp256k1ElGamalDoubleAndAddAlternate()
+        public void TestSecp256k1ElGamalBinaryDoubleAndAdd()
         {
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
@@ -92,7 +92,7 @@ namespace OpenECCTest.Performance
                 var stopwatch = Stopwatch.StartNew();
 
                 var curve = CurveFactory.secp256k1;
-                WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+                WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
                 var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
                 var encryptor = new ElGamalEncryptor(curve, encoder);
 

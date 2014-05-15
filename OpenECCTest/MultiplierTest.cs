@@ -70,40 +70,40 @@ namespace OpenECCTest
 
         #endregion
 
-        #region double_and_add_alternate
+        #region binary_double_and_add
 
         [TestMethod]
-        public void DoubleAndAddMultiplierAlternateOneTest()
+        public void BinaryDoubleAndAddMultiplierOneTest()
         {
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
             Assert.AreEqual(p, p * 1);
         }
 
         [TestMethod]
-        public void DoubleAndAddMultiplierAlternateTwoTest()
+        public void BinaryDoubleAndAddMultiplierTwoTest()
         {
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
             Assert.AreEqual(p2, p * 2);
         }
 
         [TestMethod]
-        public void DoubleAndAddMultiplierAlternateFourTest()
+        public void BinaryDoubleAndAddMultiplierFourTest()
         {
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
             Assert.AreEqual(p4, p * 4);
         }
 
         [TestMethod]
-        public void DoubleAndAddMultiplierAlternateTenTest()
+        public void BinaryDoubleAndAddMultiplierTenTest()
         {
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
             Assert.AreEqual(p10, p * 10);
         }
 
         [TestMethod]
-        public void DoubleAndAddMultiplierAlternateHundredTest()
+        public void BinaryDoubleAndAddMultiplierHundredTest()
         {
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            WeierstrassCurvePoint.Multiplier = new BinaryDoubleAndAddPointMultiplier();
             Assert.AreEqual(p100, p * 100);
         }
 
