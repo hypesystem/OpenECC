@@ -12,6 +12,7 @@ namespace OpenECCTest.Performance
     [TestClass]
     public class FullStackPerformanceTests
     {
+        int num_runs = 1;
         Plaintext _m = new Plaintext("Hello World");
 
         [TestCleanup]
@@ -23,8 +24,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalDoubleAndAdd()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -83,8 +82,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalDoubleAndAddAlternate()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -92,7 +89,6 @@ namespace OpenECCTest.Performance
 
             for (int i = 0; i < num_runs; i++)
             {
-
                 var stopwatch = Stopwatch.StartNew();
 
                 var curve = CurveFactory.secp256k1;
@@ -143,8 +139,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalNaf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -203,8 +197,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalW2Naf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -263,8 +255,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalW3Naf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -323,8 +313,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalW4Naf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -383,8 +371,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalW5Naf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
@@ -443,8 +429,6 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalW6Naf()
         {
-            int num_runs = 100;
-
             TimeSpan[] setup_times = new TimeSpan[num_runs];
             TimeSpan[] key_generation_times = new TimeSpan[num_runs];
             TimeSpan[] encryption_times = new TimeSpan[num_runs];
