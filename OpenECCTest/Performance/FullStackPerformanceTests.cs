@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using OpenECC;
 using OpenECC.Encryption;
 using OpenECC.Encryption.Core;
@@ -13,12 +14,6 @@ namespace OpenECCTest.Performance
     {
         Plaintext _m = new Plaintext("Hello World");
 
-        public static void AssertRuntime(TimeSpan expected, TimeSpan actual, string msg = "")
-        {
-            if(actual > expected)
-                throw new AssertFailedException("Runtime assertion "+msg+" failed. Expected <" + expected + ">. Actual <" + actual + ">");
-        }
-
         [TestCleanup]
         public void CleanUp()
         {
@@ -28,83 +23,181 @@ namespace OpenECCTest.Performance
         [TestMethod]
         public void TestSecp256k1ElGamalDoubleAndAdd()
         {
-            var stopwatch = Stopwatch.StartNew();
+            int num_runs = 100;
 
-            var curve = CurveFactory.secp256k1;
-            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplier();
-            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
-            var encryptor = new ElGamalEncryptor(curve, encoder);
+            TimeSpan[] setup_times = new TimeSpan[num_runs];
+            TimeSpan[] key_generation_times = new TimeSpan[num_runs];
+            TimeSpan[] encryption_times = new TimeSpan[num_runs];
+            TimeSpan[] decryption_times = new TimeSpan[num_runs];
 
-            stopwatch.Stop();
-            var t_setup = stopwatch.Elapsed;
-            stopwatch.Restart();
+            for (int i = 0; i < num_runs; i++)
+            {
 
-            var keys = encryptor.GenerateKeyPair();
+                var stopwatch = Stopwatch.StartNew();
 
-            stopwatch.Stop();
-            var t_key_generation = stopwatch.Elapsed;
-            stopwatch.Restart();
+                var curve = CurveFactory.secp256k1;
+                WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplier();
+                var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+                var encryptor = new ElGamalEncryptor(curve, encoder);
 
-            var c = encryptor.Encrypt(keys.PublicKey, _m);
+                stopwatch.Stop();
+                var t_setup = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            stopwatch.Stop();
-            var t_encryption = stopwatch.Elapsed;
-            stopwatch.Restart();
+                var keys = encryptor.GenerateKeyPair();
 
-            var m2 = encryptor.Decrypt(keys.PrivateKey, c);
+                stopwatch.Stop();
+                var t_key_generation = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            stopwatch.Stop();
-            var t_decryption = stopwatch.Elapsed;
-            var t_total = t_setup + t_key_generation + t_encryption + t_decryption;
+                var c = encryptor.Encrypt(keys.PublicKey, _m);
 
-            Assert.AreEqual(_m, m2);
+                stopwatch.Stop();
+                var t_encryption = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            throw new AssertFailedException("Runtime " + t_total + "(" + t_key_generation + "," + t_encryption + "," + t_decryption + ")");
+                var m2 = encryptor.Decrypt(keys.PrivateKey, c);
 
-            AssertRuntime(TimeSpan.FromSeconds(10d), t_key_generation, "key generation");
-            AssertRuntime(TimeSpan.FromSeconds(20d), t_decryption, "decryption");
-            AssertRuntime(TimeSpan.FromSeconds(20d), t_encryption, "encryption");
+                stopwatch.Stop();
+                var t_decryption = stopwatch.Elapsed;
+                var t_total = t_setup + t_key_generation + t_encryption + t_decryption;
+
+                Assert.AreEqual(_m, m2);
+
+                setup_times[i] = t_setup;
+                key_generation_times[i] = t_key_generation;
+                encryption_times[i] = t_encryption;
+                decryption_times[i] = t_decryption;
+            }
+
+            var setup_avg = setup_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var key_generation_avg = key_generation_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var encryption_avg = encryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var decryption_avg = decryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+
+            var total_avg = setup_avg + key_generation_avg + encryption_avg + decryption_avg;
+
+            throw new AssertFailedException("Runtime " + total_avg + "(" + key_generation_avg + "," + encryption_avg + "," + decryption_avg + ")");
+        }
+
+        [TestMethod]
+        public void TestSecp256k1ElGamalDoubleAndAddAlternate()
+        {
+            int num_runs = 100;
+
+            TimeSpan[] setup_times = new TimeSpan[num_runs];
+            TimeSpan[] key_generation_times = new TimeSpan[num_runs];
+            TimeSpan[] encryption_times = new TimeSpan[num_runs];
+            TimeSpan[] decryption_times = new TimeSpan[num_runs];
+
+            for (int i = 0; i < num_runs; i++)
+            {
+
+                var stopwatch = Stopwatch.StartNew();
+
+                var curve = CurveFactory.secp256k1;
+                WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+                var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+                var encryptor = new ElGamalEncryptor(curve, encoder);
+
+                stopwatch.Stop();
+                var t_setup = stopwatch.Elapsed;
+                stopwatch.Restart();
+
+                var keys = encryptor.GenerateKeyPair();
+
+                stopwatch.Stop();
+                var t_key_generation = stopwatch.Elapsed;
+                stopwatch.Restart();
+
+                var c = encryptor.Encrypt(keys.PublicKey, _m);
+
+                stopwatch.Stop();
+                var t_encryption = stopwatch.Elapsed;
+                stopwatch.Restart();
+
+                var m2 = encryptor.Decrypt(keys.PrivateKey, c);
+
+                stopwatch.Stop();
+                var t_decryption = stopwatch.Elapsed;
+                var t_total = t_setup + t_key_generation + t_encryption + t_decryption;
+
+                Assert.AreEqual(_m, m2);
+
+                setup_times[i] = t_setup;
+                key_generation_times[i] = t_key_generation;
+                encryption_times[i] = t_encryption;
+                decryption_times[i] = t_decryption;
+            }
+
+            var setup_avg = setup_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var key_generation_avg = key_generation_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var encryption_avg = encryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var decryption_avg = decryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+
+            var total_avg = setup_avg + key_generation_avg + encryption_avg + decryption_avg;
+
+            throw new AssertFailedException("Runtime " + total_avg + "(" + key_generation_avg + "," + encryption_avg + "," + decryption_avg + ")");
         }
 
         [TestMethod]
         public void TestSecp256k1ElGamalFpNaf()
         {
-            var stopwatch = Stopwatch.StartNew();
+            int num_runs = 100;
 
-            var curve = CurveFactory.secp256k1;
-            WeierstrassCurvePoint.Multiplier = new FpNafMultiplier();
-            var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
-            var encryptor = new ElGamalEncryptor(curve, encoder);
+            TimeSpan[] setup_times = new TimeSpan[num_runs];
+            TimeSpan[] key_generation_times = new TimeSpan[num_runs];
+            TimeSpan[] encryption_times = new TimeSpan[num_runs];
+            TimeSpan[] decryption_times = new TimeSpan[num_runs];
 
-            stopwatch.Stop();
-            var t_setup = stopwatch.Elapsed;
-            stopwatch.Restart();
+            for (int i = 0; i < num_runs; i++)
+            {
 
-            var keys = encryptor.GenerateKeyPair();
+                var stopwatch = Stopwatch.StartNew();
 
-            stopwatch.Stop();
-            var t_key_generation = stopwatch.Elapsed;
-            stopwatch.Restart();
+                var curve = CurveFactory.secp256k1;
+                WeierstrassCurvePoint.Multiplier = new FpNafMultiplier();
+                var encoder = new ProbabilisticWeierstrassMessageEncoder(curve, new BigInteger(7));
+                var encryptor = new ElGamalEncryptor(curve, encoder);
 
-            var c = encryptor.Encrypt(keys.PublicKey, _m);
+                stopwatch.Stop();
+                var t_setup = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            stopwatch.Stop();
-            var t_encryption = stopwatch.Elapsed;
-            stopwatch.Restart();
+                var keys = encryptor.GenerateKeyPair();
 
-            var m2 = encryptor.Decrypt(keys.PrivateKey, c);
+                stopwatch.Stop();
+                var t_key_generation = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            stopwatch.Stop();
-            var t_decryption = stopwatch.Elapsed;
-            var t_total = t_setup + t_key_generation + t_encryption + t_decryption;
+                var c = encryptor.Encrypt(keys.PublicKey, _m);
 
-            Assert.AreEqual(_m, m2);
+                stopwatch.Stop();
+                var t_encryption = stopwatch.Elapsed;
+                stopwatch.Restart();
 
-            throw new AssertFailedException("Runtime " + t_total + "(" + t_key_generation + "," + t_encryption + "," + t_decryption + ")");
+                var m2 = encryptor.Decrypt(keys.PrivateKey, c);
 
-            AssertRuntime(TimeSpan.FromSeconds(10d), t_key_generation, "key generation");
-            AssertRuntime(TimeSpan.FromSeconds(20d), t_decryption, "decryption");
-            AssertRuntime(TimeSpan.FromSeconds(20d), t_encryption, "encryption");
+                stopwatch.Stop();
+                var t_decryption = stopwatch.Elapsed;
+                var t_total = t_setup + t_key_generation + t_encryption + t_decryption;
+
+                Assert.AreEqual(_m, m2);
+
+                setup_times[i] = t_setup;
+                key_generation_times[i] = t_key_generation;
+                encryption_times[i] = t_encryption;
+                decryption_times[i] = t_decryption;
+            }
+
+            var setup_avg = setup_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var key_generation_avg = key_generation_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var encryption_avg = encryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+            var decryption_avg = decryption_times.Sum(x => x.Milliseconds) / (double)num_runs;
+
+            var total_avg = setup_avg + key_generation_avg + encryption_avg + decryption_avg;
+
+            throw new AssertFailedException("Runtime " + total_avg + "(" + key_generation_avg + "," + encryption_avg + "," + decryption_avg + ")");
         }
     }
 }

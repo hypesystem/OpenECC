@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigIntegerConversion.cs" />
+    <Compile Include="DoubleAndAddPointMultiplierAlternate.cs" />
     <Compile Include="DoubleAndAddPointMultiplier.cs" />
     <Compile Include="FpNafMultiplier.cs" />
     <Compile Include="IPointMultiplier.cs" />

@@ -70,6 +70,45 @@ namespace OpenECCTest
 
         #endregion
 
+        #region double_and_add_alternate
+
+        [TestMethod]
+        public void DoubleAndAddMultiplierAlternateOneTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            Assert.AreEqual(p, p * 1);
+        }
+
+        [TestMethod]
+        public void DoubleAndAddMultiplierAlternateTwoTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            Assert.AreEqual(p2, p * 2);
+        }
+
+        [TestMethod]
+        public void DoubleAndAddMultiplierAlternateFourTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            Assert.AreEqual(p4, p * 4);
+        }
+
+        [TestMethod]
+        public void DoubleAndAddMultiplierAlternateTenTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            Assert.AreEqual(p10, p * 10);
+        }
+
+        [TestMethod]
+        public void DoubleAndAddMultiplierAlternateHundredTest()
+        {
+            WeierstrassCurvePoint.Multiplier = new DoubleAndAddPointMultiplierAlternate();
+            Assert.AreEqual(p100, p * 100);
+        }
+
+        #endregion
+
         #region fpnaf
 
         [TestMethod]

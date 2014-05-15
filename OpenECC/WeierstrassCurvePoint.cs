@@ -86,6 +86,8 @@ namespace OpenECC
 
         public override string ToString()
         {
+            if (X == null && Y == null) return "WeierstrassCurvePoint(Infinity)";
+            if (X == null || Y == null) return "WeierstrassCurvePoint(Invalid)";
             return "WeierstrassCurvePoint(" + X.Value + "," + Y.Value + ")";
         }
 
