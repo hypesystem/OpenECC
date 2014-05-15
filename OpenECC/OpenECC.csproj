@@ -46,7 +46,6 @@
     <Compile Include="BigIntegerConversion.cs" />
     <Compile Include="DoubleAndAddPointMultiplier.cs" />
     <Compile Include="FpNafMultiplier.cs" />
-    <Compile Include="InvalidCurveException.cs" />
     <Compile Include="IPointMultiplier.cs" />
     <Compile Include="WeierstrassCurvePoint.cs" />
     <Compile Include="CurveFactory.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeierstrassCurve.cs" />
-    <Compile Include="WNafPointMultiplier.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

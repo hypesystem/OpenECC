@@ -21,7 +21,7 @@ namespace OpenECC
         public WeierstrassCurvePoint(FiniteFieldElement x, FiniteFieldElement y, ICurve curve)
         {
             if (!(curve is WeierstrassCurve))
-                throw new InvalidCurveException("A weierstrass curve point should only be placed on a weierstrass curve, but was placed on " + curve + ".");
+                throw new ArgumentException("A weierstrass curve point should only be placed on a weierstrass curve, but was placed on " + curve + ".", "curve");
 
             _x = x;
             _y = y;
@@ -35,12 +35,12 @@ namespace OpenECC
         public override Point Add(Point other)
         {
             if(!(other is WeierstrassCurvePoint))
-                throw new InvalidCurveException("Cannot add two points that belong to different curve-types. Second point must be WeierstrassCurvePoint.");
+                throw new ArgumentException("Cannot add two points that belong to different curve-types. Second point must be WeierstrassCurvePoint.", "other");
 
             var q = other as WeierstrassCurvePoint;
 
             if (this._curve != q._curve)
-                throw new InvalidCurveException("Cannot add two points on different curves.");
+                throw new ArgumentException("Cannot add two points on different curves.", "other");
 
             //p + infinity = p
             if (q.Equals(_curve.Infinity))

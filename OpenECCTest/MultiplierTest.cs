@@ -31,39 +31,6 @@ namespace OpenECCTest
             WeierstrassCurvePoint.Multiplier = WeierstrassCurvePoint.DefaultMultiplier;
         }
 
-        #region naive
-
-        /*
-        [TestMethod]
-        public void NaiveMultiplierOneTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new NaivePointMultiplier();
-            Assert.AreEqual(p, p * 1);
-        }
-
-        [TestMethod]
-        public void NaiveMultiplierTwoTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new NaivePointMultiplier();
-            Assert.AreEqual(p2, p * 2);
-        }
-
-        [TestMethod]
-        public void NaiveMultiplierFourTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new NaivePointMultiplier();
-            Assert.AreEqual(p4, p * 4);
-        }
-
-        [TestMethod]
-        public void NaiveMultiplierTenTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new NaivePointMultiplier();
-            Assert.AreEqual(p10, p * 10);
-        }*/
-
-        #endregion
-
         #region double_and_add
 
         [TestMethod]
@@ -142,44 +109,5 @@ namespace OpenECCTest
 
         #endregion
 
-        #region wnaf
-
-        /*
-        [TestMethod]
-        public void WNafPointMultiplierOneTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
-            Assert.AreEqual(p, p * 1);
-        }
-
-        [TestMethod]
-        public void WNafPointMultiplierTwoTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
-            Assert.AreEqual(p2, p * 2);
-        }
-
-        [TestMethod]
-        public void WNafPointMultiplierFourTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
-            Assert.AreEqual(p4, p * 4);
-        }
-
-        [TestMethod]
-        public void WNafPointMultiplierTenTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
-            Assert.AreEqual(p10, p * 10);
-        }
-
-        [TestMethod]
-        public void WNafPointMultiplierHundredTest()
-        {
-            WeierstrassCurvePoint.Multiplier = new WNafPointMultiplier();
-            Assert.AreEqual(p100, p * 100);
-        }*/
-
-        #endregion
     }
 }
