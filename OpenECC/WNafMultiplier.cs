@@ -12,12 +12,16 @@ namespace OpenECC
         private readonly int _w;
         private readonly int _two_to_w;
         private readonly int _limit;
+        private readonly IPointMultiplier _precomputer;
 
-        public WNafMultiplier(int w)
+        public WNafMultiplier(int w) : this(w, new DoubleAndAddPointMultiplierAlternate()) { }
+
+        public WNafMultiplier(int w, IPointMultiplier precomputer)
         {
             _w = w;
             _two_to_w = (int)Math.Pow(2, _w);
             _limit = (int)Math.Pow(2, _w - 1);
+            _precomputer = precomputer;
         }
 
         public Point Multiply(Point p, BigInteger k)
@@ -46,7 +50,7 @@ namespace OpenECC
             return result;
         }
 
-        IEnumerable<long> ComputeWNaf(BigInteger k)
+        public IEnumerable<long> ComputeWNaf(BigInteger k)
         {
             while (k >= 1)
             {
@@ -80,12 +84,7 @@ namespace OpenECC
 
             for (int i = 1; i < _limit; i = i + 2)
             {
-                var r = p;
-                for (int j = 1; j < i; j++)
-                {
-                    r = r + p;
-                }
-                arr[i] = r;
+                arr[i] = _precomputer.Multiply(p,i);
             }
 
             return arr;

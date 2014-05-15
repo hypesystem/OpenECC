@@ -10,7 +10,7 @@ namespace OpenECC
     public abstract class Point
     {
         private static IPointMultiplier _multiplier = null;
-        private static IPointMultiplier _default_multiplier = new FpNafMultiplier();
+        private static IPointMultiplier _default_multiplier = new WNafMultiplier(3);
 
         public static IPointMultiplier Multiplier
         {
