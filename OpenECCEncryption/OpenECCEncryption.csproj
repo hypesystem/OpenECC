@@ -40,9 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainParameters.cs" />
-    <Compile Include="EciesCiphertext.cs" />
-    <Compile Include="EciesEncryptor.cs" />
     <Compile Include="ElGamalCiphertext.cs" />
     <Compile Include="ElGamalEncryptor.cs" />
     <Compile Include="IEncryptor.cs" />
@@ -57,10 +54,6 @@
     <ProjectReference Include="..\OpenECCEncryptionCore\OpenECCEncryptionCore.csproj">
       <Project>{b8c68960-ff90-46aa-a34f-67fee5a54190}</Project>
       <Name>OpenECCEncryptionCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj">
-      <Project>{67a8e411-ab59-41c1-969a-007f7c841495}</Project>
-      <Name>OpenECCSymmetricEncryptionWrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenECC\OpenECC.csproj">
       <Project>{f4f98d33-a39c-4ce6-b01d-03d51753d24f}</Project>

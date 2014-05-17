@@ -63,7 +63,6 @@
     <Compile Include="Encryption\Core\PlaintextTest.cs" />
     <Compile Include="Encryption\ElGamalEncryptorTest.cs" />
     <Compile Include="Encryption\ProbabilisticWeierstrassMessageEncoderTest.cs" />
-    <Compile Include="Encryption\RijndaelTest.cs" />
     <Compile Include="MultiplicationPerformanceTest.cs" />
     <Compile Include="MultiplierTest.cs" />
     <Compile Include="Performance\FullStackPerformanceTests.cs" />
@@ -80,10 +79,6 @@
     <ProjectReference Include="..\OpenECCEncryption\OpenECCEncryption.csproj">
       <Project>{992d8291-e489-402e-98c0-210112ae2deb}</Project>
       <Name>OpenECCEncryption</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenECCSymmetricEncryptionWrapper\OpenECCSymmetricEncryptionWrapper.csproj">
-      <Project>{67a8e411-ab59-41c1-969a-007f7c841495}</Project>
-      <Name>OpenECCSymmetricEncryptionWrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenECC\OpenECC.csproj">
       <Project>{f4f98d33-a39c-4ce6-b01d-03d51753d24f}</Project>

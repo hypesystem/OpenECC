@@ -14,91 +14,81 @@ namespace OpenECCTest.BouncyCastleComparison
         [TestMethod]
         public void CompareSecp256k1SetupRuntimes()
         {
-            var openecc_setup = Stopwatch.StartNew();
-            var openecc_curve = CurveFactory.secp256k1;
-            openecc_setup.Stop();
+            int num_runs = 100;
 
-            var bc_setup = Stopwatch.StartNew();
-            var bc_stuff = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByName("secp256k1");
-            var bc_curve = bc_stuff.Curve;
-            bc_setup.Stop();
+            long openecc_time_sum = 0L;
+            long bc_time_sum = 0L;
 
-            throw new NotImplementedException("BC: "+bc_setup.Elapsed+"; OpenECC: "+openecc_setup.Elapsed);
-            RuntimeAssert.LessThan(bc_setup.Elapsed, openecc_setup.Elapsed);
+            for (int i = 0; i < num_runs; i++)
+            {
+                var openecc_setup = Stopwatch.StartNew();
+                var openecc_curve = CurveFactory.secp256k1;
+                openecc_setup.Stop();
+
+                openecc_time_sum += openecc_setup.ElapsedMilliseconds;
+            }
+
+            for (int i = 0; i < num_runs; i++)
+            {
+                var bc_setup = Stopwatch.StartNew();
+                var bc_stuff = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByName("secp256k1");
+                var bc_curve = bc_stuff.Curve;
+                bc_setup.Stop();
+
+                bc_time_sum += bc_setup.ElapsedMilliseconds;
+            }
+
+            throw new NotImplementedException("BC: " + (bc_time_sum / (double)num_runs) + "; OpenECC: " + (openecc_time_sum / (double)num_runs));
+            //RuntimeAssert.LessThan(bc_setup.Elapsed, openecc_setup.Elapsed);
         }
 
         [TestMethod]
         public void CompareSecp256k1KeyGenerationRuntimes()
         {
-            ///
-            /// OpenECC
-            ///
-            var openecc_curve = CurveFactory.secp256k1;
+            int num_runs = 100;
 
-            var openecc_keygen_timer = Stopwatch.StartNew();
+            long openecc_time_sum = 0L;
+            long bc_time_sum = 0L;
 
-            var openecc_encoder = new ProbabilisticWeierstrassMessageEncoder(openecc_curve, new BigInteger(7));
-            var openecc_encryptor = new ElGamalEncryptor(openecc_curve, openecc_encoder);
-            var openecc_keys = openecc_encryptor.GenerateKeyPair();
+            for (int i = 0; i < num_runs; i++)
+            {
+                ///
+                /// OpenECC
+                ///
+                var openecc_curve = CurveFactory.secp256k1;
 
-            openecc_keygen_timer.Stop();
+                var openecc_keygen_timer = Stopwatch.StartNew();
 
+                var openecc_encoder = new ProbabilisticWeierstrassMessageEncoder(openecc_curve, new BigInteger(7));
+                var openecc_encryptor = new ElGamalEncryptor(openecc_curve, openecc_encoder);
+                var openecc_keys = openecc_encryptor.GenerateKeyPair();
 
-            ///
-            ///Bouncy Castle
-            ///
-            var bc_stuff = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByName("secp256k1");
+                openecc_keygen_timer.Stop();
+                openecc_time_sum += openecc_keygen_timer.Elapsed.Milliseconds;
+            }
 
-            var bc_keygen_timer = Stopwatch.StartNew();
+            for (int i = 0; i < num_runs; i++)
+            {
+                ///
+                ///Bouncy Castle
+                ///
+                var bc_stuff = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByName("secp256k1");
 
-            var bc_keygen = new Org.BouncyCastle.Crypto.Generators.ECKeyPairGenerator();
-            var bc_domain_params = new Org.BouncyCastle.Crypto.Parameters.ECDomainParameters(bc_stuff.Curve, bc_stuff.G, bc_stuff.N);
-            var bc_random = new Org.BouncyCastle.Security.SecureRandom();
-            var bc_keygen_params = new Org.BouncyCastle.Crypto.Parameters.ECKeyGenerationParameters(bc_domain_params, bc_random);
-            bc_keygen.Init(bc_keygen_params);
-            var bc_keys = bc_keygen.GenerateKeyPair();
+                var bc_keygen_timer = Stopwatch.StartNew();
 
-            bc_keygen_timer.Stop();
+                var bc_keygen = new Org.BouncyCastle.Crypto.Generators.ECKeyPairGenerator();
+                var bc_domain_params = new Org.BouncyCastle.Crypto.Parameters.ECDomainParameters(bc_stuff.Curve, bc_stuff.G, bc_stuff.N);
+                var bc_random = new Org.BouncyCastle.Security.SecureRandom();
+                var bc_keygen_params = new Org.BouncyCastle.Crypto.Parameters.ECKeyGenerationParameters(bc_domain_params, bc_random);
+                bc_keygen.Init(bc_keygen_params);
+                var bc_keys = bc_keygen.GenerateKeyPair();
 
-            throw new NotImplementedException("BC: " + bc_keygen_timer.Elapsed + "; OpenECC: " + openecc_keygen_timer.Elapsed);
-            RuntimeAssert.LessThan(bc_keygen_timer.Elapsed, openecc_keygen_timer.Elapsed);
-        }
+                bc_keygen_timer.Stop();
+                bc_time_sum += bc_keygen_timer.Elapsed.Milliseconds;
+            }
 
-        [TestMethod]
-        public void CompareSecp256k1EncryptionRuntimes()
-        {
-            ///
-            /// OpenECC
-            ///
-            var openecc_curve = CurveFactory.secp256k1;
-            var openecc_encoder = new ProbabilisticWeierstrassMessageEncoder(openecc_curve, new BigInteger(7));
-            var openecc_encryptor = new ElGamalEncryptor(openecc_curve, openecc_encoder);
-            var openecc_keys = openecc_encryptor.GenerateKeyPair();
-            var openecc_plaintext = new Plaintext("Hello, World.");
-
-            var openecc_encryption_timer = Stopwatch.StartNew();
-            var openecc_ciphertext = openecc_encryptor.Encrypt(openecc_keys.PublicKey, openecc_plaintext);
-            openecc_encryption_timer.Stop();
-
-            ///
-            /// Bouncy Castle
-            ///
-            var bc_stuff = Org.BouncyCastle.Asn1.Sec.SecNamedCurves.GetByName("secp256k1");
-            var bc_keygen = new Org.BouncyCastle.Crypto.Generators.ECKeyPairGenerator();
-            var bc_domain_params = new Org.BouncyCastle.Crypto.Parameters.ECDomainParameters(bc_stuff.Curve, bc_stuff.G, bc_stuff.N);
-            var bc_random = new Org.BouncyCastle.Security.SecureRandom();
-            var bc_keygen_params = new Org.BouncyCastle.Crypto.Parameters.ECKeyGenerationParameters(bc_domain_params, bc_random);
-            bc_keygen.Init(bc_keygen_params);
-            var bc_keys = bc_keygen.GenerateKeyPair();
-
-            var bc_encryption_timer = Stopwatch.StartNew();
-            //TODO: Encryption!
-        }
-
-        [TestMethod]
-        public void CompareSecp256k1DecryptionRuntimes()
-        {
-
+            throw new NotImplementedException("BC: " + (bc_time_sum/(double)num_runs) + "; OpenECC: " + (openecc_time_sum/(double)num_runs));
+            //RuntimeAssert.LessThan(bc_time_sum / (double)num_runs, openecc_time_sum / (double)num_runs);
         }
     }
 }
